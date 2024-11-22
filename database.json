@@ -237,7 +237,7 @@
         },
         {
             "id": 4,
-            "categoryName": "Travlling"
+            "categoryName": "Travelling"
         },
         {
             "id": 5,
@@ -249,7 +249,6 @@
             "id": 1,
             "content": "Great post!",
             "createdTime": "2022-01-01 10:00:00",
-            "image": "https://example.com/avatar.jpg",
             "userId": 1,
             "postId": 1
         },
@@ -257,7 +256,6 @@
             "id": 2,
             "content": "Thanks for the tip!",
             "createdTime": "2022-01-02 11:00:00",
-            "image": "https://example.com/avatar.jpg",
             "userId": 2,
             "postId": 1
         },
@@ -265,7 +263,6 @@
             "id": 3,
             "content": "I agree with this post.",
             "createdTime": "2022-01-02 12:00:00",
-            "image": "https://example.com/avatar.jpg",
             "userId": 3,
             "postId": 1
         },
@@ -273,7 +270,6 @@
             "id": 4,
             "content": "This post is very interesting.",
             "createdTime": "2022-01-04 23:00:00",
-            "image": "https://example.com/avatar.jpg",
             "userId": 4,
             "postId": 2
         },
@@ -281,7 +277,6 @@
             "id": 5,
             "content": "I totally agree with this post.",
             "createdTime": "2022-01-05 00:00:00",
-            "image": "https://example.com/avatar.jpg",
             "userId": 5,
             "postId": 2
         }

@@ -62,6 +62,10 @@ function Home() {
         pageNumbers.push(i);
     }
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search, selectedCate])
+
 
     return (
         <div>

@@ -87,6 +87,7 @@ function MyPost() {
                                                 style={{
                                                     fontSize: '0.9rem',
                                                     lineHeight: '1.4',
+                                                    textAlign: 'left'
                                                 }}
                                             >
                                                 {post.description}

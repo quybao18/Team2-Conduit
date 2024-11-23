@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Form, ListGroup, InputGroup, FormControl, Card } from 'react-bootstrap';
 import Header from '../components/Header';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../components/Footer';
 
@@ -14,9 +14,18 @@ function DetailPost() {
     const [category, setCategory] = useState([]);
     const [comments, setComments] = useState([]);
 
+    const [authentication, setAuthentication] = useState(null);
+
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchData = async () => {
             try {
+                const authenData = localStorage.getItem('user');
+                if (authenData) {
+                    setAuthentication(JSON.parse(authenData));
+                }
+
                 const userResponse = await axios.get('http://localhost:9999/user');
                 const postResponse = await axios.get(`http://localhost:9999/post/${pid}`);
                 const categoryResponse = await axios.get('http://localhost:9999/category');
@@ -31,6 +40,57 @@ function DetailPost() {
         }
         fetchData();
     }, [pid]);
+
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        return `${year}-${day}-${month} ${hours}:${minutes}:${seconds}`;
+      };
+
+    const [addComment, setAddComment] = useState({
+        content: '',
+        createdTime: '',
+        userId: null,
+        postId: ''
+    })
+
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setAddComment({
+            ...addComment,
+            [name] :  value
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const currentTime = formatDate(new Date());
+        const newComment = {
+            ...addComment,
+            id: comments.length + 1,
+            userId: authentication.id,
+            createdTime: currentTime,
+            postId: post.id
+        }
+        try {
+            const response = await axios.post('http://localhost:9999/comment', newComment);
+            setComments((prevComments) => [
+                ...prevComments,
+                response.data
+            ])
+            alert('Comment added successfully');
+            setAddComment({
+                content: '',
+            })
+            navigate(`/post/${post.id}`);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <>
@@ -113,7 +173,7 @@ function DetailPost() {
                                                         }
                                                     </Col>
                                                     <Col style={{ textAlign: 'left' }}>
-                                                        <span className="fw-bold text-success" style={{display: 'block'}}>
+                                                        <span className="fw-bold text-success" style={{ display: 'block' }}>
                                                             {
                                                                 user.find(user => user.id === comment.userId)?.userName
                                                             }
@@ -127,33 +187,44 @@ function DetailPost() {
                                 })
                             }
 
-                            <div className="p-4 bg-light shadow-sm rounded mt-5">
-                                <Form>
-                                    <Form.Group controlId="commentInput" className="mb-3">
-                                        <Form.Label className="fw-bold">Leave a Comment</Form.Label>
-                                        <InputGroup>
-                                            <FormControl
-                                                as="textarea"
-                                                rows={4}
-                                                placeholder="Write your comment..."
-                                                className="rounded border-0 shadow-sm"
-                                            />
-                                        </InputGroup>
-                                    </Form.Group>
-                                    <Button
-                                        variant="primary"
-                                        type="submit"
-                                        className="w-100 py-2 fw-bold shadow-sm"
-                                    >
-                                        Post Comment
-                                    </Button>
-                                </Form>
-                            </div>
+                            {
+                                authentication ? (
+                                    <>
+                                        <div className="p-4 bg-light shadow-sm rounded mt-5">
+                                            <Form onSubmit={handleSubmit}>
+                                                <Form.Group controlId="commentInput" className="mb-3">
+                                                    <Form.Label className="fw-bold">Leave a Comment</Form.Label>
+                                                    <InputGroup>
+                                                        <FormControl
+                                                            as="textarea"
+                                                            rows={4}
+                                                            placeholder="Write your comment..."
+                                                            className="rounded border-0 shadow-sm"
+                                                            name='content'
+                                                            value={addComment.content}
+                                                            onChange={handleChange}
+                                                        />
+                                                    </InputGroup>
+                                                </Form.Group>
+                                                <Button
+                                                    variant="primary"
+                                                    type="submit"
+                                                    className="w-100 py-2 fw-bold shadow-sm"
+                                                >
+                                                    Post Comment
+                                                </Button>
+                                            </Form>
+                                        </div>
+                                    </>
+                                ) : (
+                                    null
+                                )
+                            }
                         </div>
                     </Col>
                 </Row>
 
-                <Footer/>
+                <Footer />
             </div>
         </>
     );

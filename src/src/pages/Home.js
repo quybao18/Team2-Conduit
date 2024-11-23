@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import NewPost from './NewPost';
 
 function Home() {
 
@@ -15,6 +16,7 @@ function Home() {
     const [selectedCate, setSelectedCate] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 5;
+
 
     const navigate = useNavigate();
 
@@ -41,8 +43,7 @@ function Home() {
         const matchesSearch = post.title.toLowerCase().includes(search.toLowerCase());
         const matchesSelected = selectedCate ? post.categoryId === selectedCate : true;
         return matchesSearch && matchesSelected;
-
-    })
+    }).sort((a, b) => b.id - a.id)
 
     const handleSearch = (e) => {
         setSearch(e.target.value)
@@ -142,6 +143,7 @@ function Home() {
                                             style={{
                                                 fontSize: '0.9rem',
                                                 lineHeight: '1.4',
+                                                textAlign: 'left'
                                             }}
                                         >
                                             {post.description}
@@ -224,7 +226,6 @@ function Home() {
             </Pagination>
 
             <Footer />
-
         </div>
     )
 }

@@ -127,7 +127,7 @@ function Login() {
 
                                             <a className="small text-muted" href="#!">Forgot password?</a>
                                             <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-                                                Don't have an account? <a href="#!" style={{ color: '#393f81' }}>Register here</a>
+                                                Don't have an account? <a onClick={() => navigate('/register')} style={{ color: '#393f81', cursor: 'pointer' }}>Register here</a>
                                             </p>
                                             <a className="small text-muted">Terms of use.</a>
                                             <a className="small text-muted">Privacy policy</a>

@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../components/Footer';
+import { FaTrash } from 'react-icons/fa';
 
 function DetailPost() {
 
@@ -49,7 +50,7 @@ function DetailPost() {
         const minutes = String(date.getMinutes()).padStart(2, '0');
         const seconds = String(date.getSeconds()).padStart(2, '0');
         return `${year}-${day}-${month} ${hours}:${minutes}:${seconds}`;
-      };
+    };
 
     const [addComment, setAddComment] = useState({
         content: '',
@@ -59,10 +60,10 @@ function DetailPost() {
     })
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setAddComment({
             ...addComment,
-            [name] :  value
+            [name]: value
         })
     }
 
@@ -89,6 +90,19 @@ function DetailPost() {
             navigate(`/post/${post.id}`);
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    const handleDelete = async (cid) => {
+        const confirm = window.confirm('Are you sure you want to delete this comment?');
+        if (confirm) {
+            try {
+                await axios.delete(`http://localhost:9999/comment/${cid}`);
+                setComments(comments.filter(comment => comment.id !== cid));
+                navigate(`/post/${post.id}`)
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 
@@ -180,6 +194,21 @@ function DetailPost() {
                                                         </span>{' '}
                                                         <small className="text-muted">{comment.createdTime}</small>
                                                     </Col>
+                                                    {
+                                                        (authentication?.id === comment.userId) ?  (
+                                                            <>
+                                                                <Col xs="auto">
+                                                                    <FaTrash
+                                                                        className="text-danger"
+                                                                        style={{ cursor: 'pointer' }}
+                                                                        onClick={() => handleDelete(comment.id)}
+                                                                    />
+                                                                </Col>
+                                                            </>
+                                                        ) : (
+                                                            <></>
+                                                        )
+                                                    }
                                                 </Row>
                                             </Card.Footer>
                                         </Card>

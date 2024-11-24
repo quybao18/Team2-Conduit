@@ -115,7 +115,7 @@
       "bio": "I am a person who love learning new things, this helps me more develop ",
       "email": "vanh123@gmail.com",
       "password": "123",
-      "address": "123st London, England",
+      "address": "London, England",
       "phone": "035-216-199",
       "roleId": 1,
       "avatar": "avatar_11",
@@ -240,6 +240,15 @@
       "userId": 10,
       "categoryId": 2,
       "id": 12
+    },
+    {
+      "title": "Which country should everyone visit once in their life ?",
+      "description": "Somebody can suggest my some places should be visti ",
+      "favoriteCount": 0,
+      "createdTime": "2024-25-11 01:48:43",
+      "userId": 11,
+      "categoryId": 4,
+      "id": 13
     }
   ],
   "category": [
@@ -313,6 +322,13 @@
       "userId": 10,
       "postId": 9,
       "id": 7
+    },
+    {
+      "content": "I suggest you should going to Switzerland",
+      "createdTime": "2024-25-11 04:49:54",
+      "userId": 3,
+      "postId": 13,
+      "id": 8
     }
   ]
 }

@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import UpdateProfile from './pages/UpdateProfile';
 import ErrorPage from './components/ErrorPage';
+import MyFavorite from './pages/MyFavorite';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/mypost/:mpid' element={<MyPost/>}/>
         <Route path='/post/:pid' element={<DetailPost/>}/>   
+        <Route path='/favorite/:uid' element={<MyFavorite/>}/>
         <Route path='/profile/:uid' element={<Profile/>}/>     
         <Route path='/updateProfile/:uid' element={<UpdateProfile/>}/>
         <Route path='*' element={<ErrorPage/>}/>

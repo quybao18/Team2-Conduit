@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Dropdown, Nav, Navbar } from 'react-bootstrap';
-import { FaSignInAlt, FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
+import { FaSignInAlt, FaSignOutAlt, FaTachometerAlt, FaUserAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import NewPost from '../pages/NewPost';
 
@@ -40,6 +40,7 @@ function Header() {
                 <>
                   <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
                   <Nav.Link onClick={() => navigate(`/mypost/${user.id}`)}>My Posts</Nav.Link>
+                  <Nav.Link onClick={() => navigate(`/favorite/${user.id}`)}>My Favorite</Nav.Link>
                   <Nav.Link onClick={handleShowAddPost}>New Post</Nav.Link>
                 </>
               ) : (
@@ -74,6 +75,14 @@ function Header() {
                         <FaUserAlt className="me-2" />
                         Profile
                       </Dropdown.Item>
+                      {
+                        user.roleId === 0 && (
+                          <Dropdown.Item onClick={() => navigate(`/dashboard`)}>
+                            <FaTachometerAlt className="me-2" />
+                            Dashboard
+                          </Dropdown.Item>
+                        )
+                      }
                       <Dropdown.Item onClick={handleLogout}>
                         <FaSignOutAlt className="me-2" />
                         Logout

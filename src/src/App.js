@@ -7,18 +7,23 @@ import Login from './pages/Login';
 import MyPost from './pages/MyPost';
 import NewPost from './pages/NewPost';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
+import UpdateProfile from './pages/UpdateProfile';
+import ErrorPage from './components/ErrorPage';
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
       <Routes>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register />} />
+        <Route path='/register' element={<Register/>}/>
         <Route path='/' element={<Home/>}/>
         <Route path='/mypost/:mpid' element={<MyPost/>}/>
-        <Route path='/newpost' element={<NewPost/>}/>
-        <Route path='/post/:pid' element={<DetailPost/>}/>
-        
+        <Route path='/post/:pid' element={<DetailPost/>}/>   
+        <Route path='/profile/:uid' element={<Profile/>}/>     
+        <Route path='/updateProfile/:uid' element={<UpdateProfile/>}/>
+        <Route path='*' element={<ErrorPage/>}/>
       </Routes>
       </BrowserRouter>
     </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Dropdown, Nav, Navbar } from 'react-bootstrap';
-import { FaSignInAlt, FaSignOutAlt, FaTachometerAlt, FaUserAlt } from 'react-icons/fa';
+import { FaCog, FaSignInAlt, FaSignOutAlt, FaTachometerAlt, FaUserAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import NewPost from '../pages/NewPost';
 
@@ -77,10 +77,11 @@ function Header() {
                       </Dropdown.Item>
                       {
                         user.roleId === 0 && (
-                          <Dropdown.Item onClick={() => navigate(`/dashboard`)}>
-                            <FaTachometerAlt className="me-2" />
-                            Dashboard
+                          <Dropdown.Item onClick={() => navigate('/setting')}>
+                            <FaCog className="me-2" />
+                            Setting
                           </Dropdown.Item>
+
                         )
                       }
                       <Dropdown.Item onClick={handleLogout}>

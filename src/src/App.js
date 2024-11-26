@@ -11,6 +11,9 @@ import Profile from './pages/Profile';
 import UpdateProfile from './pages/UpdateProfile';
 import ErrorPage from './components/ErrorPage';
 import MyFavorite from './pages/MyFavorite';
+import Setting from './admin/Dashboad';
+import ManaAccount from './admin/ManaAccount';
+import ManaCategory from './admin/ManaCategory';
 
 function App() {
   return (
@@ -25,7 +28,11 @@ function App() {
         <Route path='/favorite/:uid' element={<MyFavorite/>}/>
         <Route path='/profile/:uid' element={<Profile/>}/>     
         <Route path='/updateProfile/:uid' element={<UpdateProfile/>}/>
+        <Route path='/setting' element={<Setting/>}/>
+        <Route path='/manaAccount' element={<ManaAccount/>}/>
+        <Route path='/manaCategory' element={<ManaCategory/>}/>
         <Route path='*' element={<ErrorPage/>}/>
+        
       </Routes>
       </BrowserRouter>
     </div>

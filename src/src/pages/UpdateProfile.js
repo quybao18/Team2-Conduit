@@ -54,7 +54,7 @@ function UpdateProfile() {
                     <h2 className="text-primary mb-4 text-center">Update Profile</h2>
                     <img onClick={() => navigate(`/profile/${uid}`)} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/BackButton.svg/2048px-BackButton.svg.png" width="50px" alt="Back" style={{ cursor: 'pointer', float: 'left'}} />
                     <Row>
-                    
+                    <Form onSubmit={handleSubmit}></Form>
                         <Col md={4} className="text-center">
                         
                             <Image

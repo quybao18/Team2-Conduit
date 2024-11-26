@@ -335,17 +335,17 @@
     {
       "id": 1,
       "userId": 1,
-      "postId": 1
+      "postId": 5
     },
     {
       "id": 2,
       "userId": 2,
-      "postId": 2
+      "postId": 4
     },
     {
       "id": 3,
       "userId": 3,
-      "postId": 3
+      "postId": 1
     }
   ]
 }

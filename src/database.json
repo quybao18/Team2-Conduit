@@ -1,0 +1,351 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "userName": "John Doe",
+      "bio": "I am John Doe, I am 30 years old",
+      "email": "joe@example.com",
+      "password": "joe1234",
+      "address": "123 Main Street, Anytown, USA",
+      "phone": "123-456-7890",
+      "roleId": 0,
+      "avatar": "avatar_01"
+    },
+    {
+      "id": 2,
+      "userName": "Jane Smith",
+      "bio": "I am Jane Smith, I am 25 years old",
+      "email": "jane@example.com",
+      "password": "jane1234",
+      "address": "456 Oak Avenue, Somewhere, USA",
+      "phone": "234-567-8901",
+      "roleId": 1,
+      "avatar": "avatar_02"
+    },
+    {
+      "id": 3,
+      "userName": "Alice Johnson",
+      "bio": "I am Alice Johnson, I am 35 years old",
+      "email": "alice@example.com",
+      "password": "alice1234",
+      "address": "789 Pine Lane, Smalltown, USA",
+      "phone": "345-678-9012",
+      "roleId": 1,
+      "avatar": "avatar_03"
+    },
+    {
+      "id": 4,
+      "userName": "Bob Brown",
+      "bio": "I am Bob Brown, I am 40 years old",
+      "email": "bob@example.com",
+      "password": "bob1234",
+      "address": "101 Maple Street, Bigcity, USA",
+      "phone": "456-789-0123",
+      "roleId": 1,
+      "avatar": "avatar_04"
+    },
+    {
+      "id": 5,
+      "userName": "Charlie Davis",
+      "bio": "I am Charlie Davis, I am 28 years old",
+      "email": "charlie@example.com",
+      "password": "charlie1234",
+      "address": "202 Birch Road, Utopia, USA",
+      "phone": "567-890-1234",
+      "roleId": 1,
+      "avatar": "avatar_05"
+    },
+    {
+      "id": 6,
+      "userName": "Diana Evans",
+      "bio": "I am Diana Evans, I am 32 years old",
+      "email": "diana@example.com",
+      "password": "diana1234",
+      "address": "303 Elm Drive, Newplace, USA",
+      "phone": "678-901-2345",
+      "roleId": 1,
+      "avatar": "avatar_06"
+    },
+    {
+      "id": 7,
+      "userName": "Evan Green",
+      "bio": "I am Evan Green, I am 27 years old",
+      "email": "evan@example.com",
+      "password": "evan1234",
+      "address": "404 Spruce Way, Hometown, USA",
+      "phone": "789-012-3456",
+      "roleId": 1,
+      "avatar": "avatar_07"
+    },
+    {
+      "id": 8,
+      "userName": "Fiona Hill",
+      "bio": "I am Fiona Hill, I am 29 years old",
+      "email": "fiona@example.com",
+      "password": "fiona1234",
+      "address": "505 Cedar Boulevard, Elsewhere, USA",
+      "phone": "890-123-4567",
+      "roleId": 1,
+      "avatar": "avatar_08"
+    },
+    {
+      "id": 9,
+      "userName": "George King",
+      "bio": "I am George King, I am 33 years old",
+      "email": "george@example.com",
+      "password": "george1234",
+      "address": "606 Willow Street, Dreamland, USA",
+      "phone": "901-234-5678",
+      "roleId": 1,
+      "avatar": "avatar_09"
+    },
+    {
+      "id": 10,
+      "userName": "Hannah Lee",
+      "bio": "I am Hannah Lee, I am 26 years old",
+      "email": "hannah@example.com",
+      "password": "hannah1234",
+      "address": "707 Aspen Court, Wonderland, USA",
+      "phone": "012-345-6789",
+      "roleId": 1,
+      "avatar": "avatar_10"
+    },
+    {
+      "userName": "Vanh",
+      "bio": "I am a person who love learning new things, this helps me more develop ",
+      "email": "vanh123@gmail.com",
+      "password": "123",
+      "address": "London, England",
+      "phone": "035-216-199",
+      "roleId": 1,
+      "avatar": "avatar_11",
+      "id": 11
+    }
+  ],
+  "role": [
+    {
+      "id": 0,
+      "roleName": "Admin"
+    },
+    {
+      "id": 1,
+      "roleName": "User"
+    }
+  ],
+  "post": [
+    {
+      "id": 1,
+      "title": "Introduction to IT: A Beginner's Guide",
+      "description": "A comprehensive guide to the basics of Information Technology for newcomers.",
+      "favoriteCount": 0,
+      "createdTime": "2022-01-01 10:00:00",
+      "userId": 1,
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "title": "Common Coding Questions and How to Solve Them",
+      "description": "This post highlights some of the most common coding interview questions and effective ways to approach them.",
+      "favoriteCount": 5,
+      "createdTime": "2022-02-01 11:15:30",
+      "userId": 2,
+      "categoryId": 2
+    },
+    {
+      "id": 3,
+      "title": "How to Make a Perfect Omelette",
+      "description": "Step-by-step guide on how to create a delicious and fluffy omelette.",
+      "favoriteCount": 8,
+      "createdTime": "2022-03-01 12:30:45",
+      "userId": 3,
+      "categoryId": 3
+    },
+    {
+      "id": 4,
+      "title": "Top 10 Travel Destinations for 2022",
+      "description": "Explore the best places to visit this year for your next vacation.",
+      "favoriteCount": 3,
+      "createdTime": "2022-04-01 13:45:00",
+      "userId": 4,
+      "categoryId": 4
+    },
+    {
+      "id": 5,
+      "title": "Understanding Car Maintenance: What Every Driver Needs to Know",
+      "description": "An informative post on how to keep your car running smoothly with basic maintenance tips.",
+      "favoriteCount": 10,
+      "createdTime": "2022-05-01 14:00:00",
+      "userId": 5,
+      "categoryId": 5
+    },
+    {
+      "id": 6,
+      "title": "Cooking 101: The Essentials Every Beginner Should Know",
+      "description": "A beginner's guide to understanding the fundamentals of cooking.",
+      "favoriteCount": 0,
+      "createdTime": "2022-06-01 15:10:15",
+      "userId": 6,
+      "categoryId": 3
+    },
+    {
+      "id": 7,
+      "title": "The Ultimate Guide to Solo Travel",
+      "description": "Learn everything you need to know about solo travel, from safety tips to planning your trip.",
+      "favoriteCount": 2,
+      "createdTime": "2022-07-01 16:20:30",
+      "userId": 7,
+      "categoryId": 4
+    },
+    {
+      "id": 8,
+      "title": "The Best Cars for First-Time Buyers",
+      "description": "A curated list of the best vehicles for people buying a car for the first time.",
+      "favoriteCount": 6,
+      "createdTime": "2022-08-01 17:25:45",
+      "userId": 8,
+      "categoryId": 5
+    },
+    {
+      "id": 9,
+      "title": "Exploring Hidden Travel Gems Around the World",
+      "description": "Discover the most beautiful and least known travel destinations across the globe.",
+      "favoriteCount": 4,
+      "createdTime": "2022-09-01 18:35:00",
+      "userId": 9,
+      "categoryId": 4
+    },
+    {
+      "id": 10,
+      "title": "How to Choose the Right Car for Your Needs",
+      "description": "A post discussing different factors to consider when choosing a car based on your lifestyle.",
+      "favoriteCount": 7,
+      "createdTime": "2022-10-01 19:40:00",
+      "userId": 10,
+      "categoryId": 5
+    },
+    {
+      "id": 11,
+      "title": "The Future of IT: Trends to Watch in 2023",
+      "description": "Stay ahead of the curve by understanding the latest trends in the Information Technology industry.",
+      "favoriteCount": 12,
+      "createdTime": "2022-11-01 20:50:30",
+      "userId": 1,
+      "categoryId": 1
+    },
+    {
+      "title": "How to pass ENW492c",
+      "description": "I wanna know some methods to overcome this subject",
+      "favoriteCount": 0,
+      "createdTime": "2024-24-11 02:09:40",
+      "userId": 10,
+      "categoryId": 2,
+      "id": 12
+    },
+    {
+      "title": "Which country should everyone visit once in their life ?",
+      "description": "Somebody can suggest my some places should be vistited",
+      "favoriteCount": 3,
+      "createdTime": "2024-25-11 01:48:43",
+      "userId": 11,
+      "categoryId": 4,
+      "id": 13
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "categoryName": "IT"
+    },
+    {
+      "id": 2,
+      "categoryName": "Question"
+    },
+    {
+      "id": 3,
+      "categoryName": "Cooking"
+    },
+    {
+      "id": 4,
+      "categoryName": "Travelling"
+    },
+    {
+      "id": 5,
+      "categoryName": "Car"
+    }
+  ],
+  "comment": [
+    {
+      "id": 1,
+      "content": "Great post!",
+      "createdTime": "2022-01-01 10:00:00",
+      "userId": 1,
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "content": "Thanks for the tip!",
+      "createdTime": "2022-01-02 11:00:00",
+      "userId": 2,
+      "postId": 1
+    },
+    {
+      "id": 3,
+      "content": "I agree with this post.",
+      "createdTime": "2022-01-02 12:00:00",
+      "userId": 3,
+      "postId": 1
+    },
+    {
+      "id": 4,
+      "content": "This post is very interesting.",
+      "createdTime": "2022-01-04 23:00:00",
+      "userId": 4,
+      "postId": 2
+    },
+    {
+      "id": 5,
+      "content": "I totally agree with this post.",
+      "createdTime": "2022-01-05 00:00:00",
+      "userId": 5,
+      "postId": 2
+    },
+    {
+      "content": "Hello",
+      "createdTime": "2024-24-11 02:59:33",
+      "userId": 10,
+      "postId": 11,
+      "id": 6
+    },
+    {
+      "content": "Oke",
+      "createdTime": "2024-24-11 03:00:18",
+      "userId": 10,
+      "postId": 9,
+      "id": 7
+    },
+    {
+      "content": "I suggest you should be going to Switzerland",
+      "id": 8,
+      "userId": 3,
+      "createdTime": "2024-25-11 04:38:56",
+      "postId": 13
+    }
+  ],
+  "favorite": [
+    {
+      "id": 1,
+      "userId": 1,
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "postId": 2
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "postId": 3
+    }
+  ]
+}

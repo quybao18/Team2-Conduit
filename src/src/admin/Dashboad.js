@@ -7,7 +7,6 @@ import axios from "axios";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 
-// Đăng ký các thành phần cần thiết của Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 function Setting() {
@@ -40,12 +39,10 @@ function Setting() {
           totalCategories: categoriesRes.data.length,
         });
 
-        // Lấy danh sách các năm từ bài viết
         const posts = postsRes.data;
         const years = [...new Set(posts.map((post) => new Date(post.createdTime).getFullYear()))];
         setAvailableYears(years);
 
-        // Thống kê số bài viết theo tháng của năm hiện tại
         filterPostsByYear(posts, selectedYear);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -67,7 +64,6 @@ function Setting() {
     setPostsByMonth(monthlyCounts);
   };
 
-  // Dữ liệu biểu đồ
   const chartData = {
     labels: [
       "January",
@@ -187,13 +183,13 @@ function Setting() {
             </Row>
           </div>
 
-          {/* Chart Section */}
+        
           <div id="chart" className="mt-5">
             <h3 className="mb-4">Post Statistics</h3>
             <div
               style={{
                 display: "flex",
-                justifyContent: "flex-end", // Căn phải. Đổi thành 'flex-start' nếu muốn căn trái.
+                justifyContent: "flex-end", 
                 marginBottom: "10px",
               }}
             >

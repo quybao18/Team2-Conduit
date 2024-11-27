@@ -25,7 +25,7 @@ const ManageCategory = () => {
 
     try {
       const response = await axios.post('/category', {
-        id: categories.length + 1,
+        id: String(categories.length + 1),
         categoryName: newCategory,
       });
       setCategories([...categories, response.data]);

@@ -128,6 +128,32 @@ function Setting() {
           <div id="dashboard" className="mb-5">
             <h3 className="mb-4">Dashboard</h3>
             <Row className="g-4">
+            <Col md={3}>
+                <Card
+                  className="text-center shadow-sm"
+                  style={{ borderRadius: "15px" }}
+                >
+                  <Card.Body>
+                    <Card.Title>Total Users</Card.Title>
+                    <Card.Text className="fs-4 text-success">
+                      {dashboardData.totalUsers}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={3}>
+                <Card
+                  className="text-center shadow-sm"
+                  style={{ borderRadius: "15px" }}
+                >
+                  <Card.Body>
+                    <Card.Title>Total Categories</Card.Title>
+                    <Card.Text className="fs-4 text-info">
+                      {dashboardData.totalCategories}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
               <Col md={3}>
                 <Card
                   className="text-center shadow-sm"
@@ -147,35 +173,9 @@ function Setting() {
                   style={{ borderRadius: "15px" }}
                 >
                   <Card.Body>
-                    <Card.Title>Total Users</Card.Title>
-                    <Card.Text className="fs-4 text-success">
-                      {dashboardData.totalUsers}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col md={3}>
-                <Card
-                  className="text-center shadow-sm"
-                  style={{ borderRadius: "15px" }}
-                >
-                  <Card.Body>
                     <Card.Title>Total Comments</Card.Title>
                     <Card.Text className="fs-4 text-warning">
                       {dashboardData.totalComments}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col md={3}>
-                <Card
-                  className="text-center shadow-sm"
-                  style={{ borderRadius: "15px" }}
-                >
-                  <Card.Body>
-                    <Card.Title>Total Categories</Card.Title>
-                    <Card.Text className="fs-4 text-info">
-                      {dashboardData.totalCategories}
                     </Card.Text>
                   </Card.Body>
                 </Card>

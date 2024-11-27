@@ -2,13 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Card, Image } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import Header from "../components/Header";
 
 function UpdateProfile() {
 
     const { uid } = useParams();
 
     const [user, setUser] = useState({});
-    const [avatar, setAvatar] = useState();
 
     const navigate = useNavigate();
 
@@ -32,20 +32,19 @@ function UpdateProfile() {
         })
     }
 
-    const handlePreviewAvatar = (e) => {
-        const file = e.target.files[0];
-        console.log(URL.createObjectURL(file));
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await axios.put(`http://localhost:9999/user/${uid}`, user);
             alert("Profile updated successfully");
+            <Header/>
+            navigate(`/profile/${uid}`)
         } catch (error) {
-            console.log(error);
+            console.error("Error updating profile:", error);
         }
-    }
+    };
+
 
     return (
         <Container className="py-5">
@@ -61,15 +60,17 @@ function UpdateProfile() {
                                     src={`../images/${user.avatar}.png`}
                                     roundedCircle
                                     fluid
-                                    style={{ width: "150px", height: "150px", border: "5px solid #e9ecef" }}
+                                    style={{ width: "150px", height: "150px", border: "5px solid #fff" }}
                                 />
+
                                 <Form.Group controlId="formFile" className="mt-3">
                                     <Form.Label>Change Avatar</Form.Label>
-                                    <Form.Control type="file" name='avatar' onChange={handlePreviewAvatar} />
+                                    <Form.Control type="input" name='avatar' value={user.avatar} onChange={handleChange} />
                                 </Form.Group>
                             </Col>
 
                             <Col md={8}>
+
                                 <Form.Group controlId="username" className="mb-3">
                                     <Form.Label style={{ fontWeight: "bold", textAlign: 'left', display: 'block' }}>Username</Form.Label>
                                     <Form.Control type="text" placeholder="Enter your username" name='userName' value={user.userName} onChange={handleChange} />
@@ -105,7 +106,6 @@ function UpdateProfile() {
                                         Save Changes
                                     </Button>
                                 </div>
-
                             </Col>
                         </Row>
                     </Form>

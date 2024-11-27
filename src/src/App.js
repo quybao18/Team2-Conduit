@@ -10,20 +10,36 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import UpdateProfile from './pages/UpdateProfile';
 import ErrorPage from './components/ErrorPage';
+import MyFavorite from './pages/MyFavorite';
+import Setting from './admin/Dashboad';
+import ManaAccount from './admin/ManaAccount';
+import ManaCategory from './admin/ManaCategory';
+import UpdateRole from './admin/UpdateRole';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
       <Routes>
+
+        {/* UI COMMON */}
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/' element={<Home/>}/>
-        <Route path='/mypost/:mpid' element={<MyPost/>}/>
-        <Route path='/post/:pid' element={<DetailPost/>}/>   
+        <Route path='/post/:pid' element={<DetailPost/>}/> 
+        <Route path='*' element={<ErrorPage/>}/>
+
+        {/* UI USER */}
+        <Route path='/mypost/:uid' element={<MyPost/>}/>
+        <Route path='/myfavorite/:uid' element={<MyFavorite/>}/>
         <Route path='/profile/:uid' element={<Profile/>}/>     
         <Route path='/updateProfile/:uid' element={<UpdateProfile/>}/>
-        <Route path='*' element={<ErrorPage/>}/>
+
+        {/* UI ADMIN */}
+        <Route path='/setting' element={<Setting/>}/>
+        <Route path='/manaAccount' element={<ManaAccount/>}/>
+        <Route path='/manaCategory' element={<ManaCategory/>}/>
+        
       </Routes>
       </BrowserRouter>
     </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap'
-import { FaUserCircle } from 'react-icons/fa'
+import { FaTrash, FaUserCircle } from 'react-icons/fa'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -8,7 +8,7 @@ import axios from 'axios'
 
 function MyPost() {
 
-    const { mpid } = useParams();
+    const { uid } = useParams();
     const [user, setUser] = useState({})
     const [posts, setPosts] = useState([]);
     const [category, setCategory] = useState([]);
@@ -18,7 +18,7 @@ function MyPost() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userResponse = await axios.get(`http://localhost:9999/user/${mpid}`);
+                const userResponse = await axios.get(`http://localhost:9999/user/${uid}`);
                 const postsResponse = await axios.get('http://localhost:9999/post');
                 const categoryResponse = await axios.get('http://localhost:9999/category');
                 setUser(userResponse.data);
@@ -29,7 +29,21 @@ function MyPost() {
             }
         }
         fetchData();
-    }, [mpid])
+    }, [uid])
+
+    const handleDelete = async (pid) => {
+        const confirm = window.confirm('Are you sure you want to delete this post?');
+        if (confirm) {
+            try {
+                await axios.delete(`http://localhost:9999/post/${pid}`)
+                setPosts(posts.filter(post => post.id !== pid));
+                alert('Post deleted successfully');
+                navigate(`/mypost/${uid}`)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
 
     return (
         <div>
@@ -93,7 +107,7 @@ function MyPost() {
                                                 {post.description}
                                             </p>
                                             <a className='direction p-0' size="sm" style={{ cursor: 'pointer', display: 'block', textAlign: 'left', textDecoration: 'none' }}
-                                            onClick={() => navigate(`/post/${post.id}`)}>Read more...</a>
+                                                onClick={() => navigate(`/post/${post.id}`)}>Read more...</a>
                                         </div>
                                     </div>
 
@@ -127,6 +141,20 @@ function MyPost() {
                                                 category.find((cate) => cate.id === post.categoryId)?.categoryName
                                             }
                                         </Badge>
+                                        <Button
+                                            variant="outline-danger"
+                                            size="sm"
+                                            style={{
+                                                fontSize: "0.8rem",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                gap: "5px",
+                                            }}
+                                            onClick={() => handleDelete(post.id)}
+                                        >
+                                            <FaTrash />
+                                            Delete
+                                        </Button>
                                     </div>
                                 </div>
                             }

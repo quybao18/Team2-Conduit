@@ -1,0 +1,300 @@
+{
+    "user":[
+            {
+                "id": 1,
+                "userName": "John Doe",
+                "bio": "I am John Doe, I am 30 years old",
+                "email": "joe@example.com",
+                "password": "joe1234",
+                "adress": "123 Main Street, Anytown, USA",
+                "phone": "123-456-7890",
+                "roleId": "0",
+                "avatar":"https://example.com/avatar.jpg"
+            },
+            {
+                "id": 2,
+                "userName": "Jane Smith",
+                "bio": "I am Jane Smith, I am 25 years old",
+                "email": "jane@example.com",
+                "password": "jane1234",
+                "adress": "456 Oak Avenue, Somewhere, USA",
+                "phone": "234-567-8901",
+                "roleId": "1",
+                "avatar":"https://example.com/avatar.jpg"
+            },
+            {
+                "id": 3,
+                "userName": "Alice Johnson",
+                "bio": "I am Alice Johnson, I am 35 years old",
+                "email": "alice@example.com",
+                "password": "alice1234",
+                "adress": "789 Pine Lane, Smalltown, USA",
+                "phone": "345-678-9012",
+                "roleId": "1",
+                "avatar":"https://example.com/avatar.jpg"
+            },
+            {
+                "id": 4,
+                "userName": "Bob Brown",
+                "bio": "I am Bob Brown, I am 40 years old",
+                "email": "bob@example.com",
+                "password": "bob1234",
+                "adress": "101 Maple Street, Bigcity, USA",
+                "phone": "456-789-0123",
+                "roleId": "1",
+                "avatar":"https://example.com/avatar.jpg"
+            },
+            {
+                "id": 5,
+                "userName": "Charlie Davis",
+                "bio": "I am Charlie Davis, I am 28 years old",
+                "email": "charlie@example.com",
+                "password": "charlie1234",
+                "adress": "202 Birch Road, Utopia, USA",
+                "phone": "567-890-1234",
+                "roleId": "1",
+                "avatar":"https://example.com/avatar.jpg"
+            },
+            {
+                "id": 6,
+                "userName": "Diana Evans",
+                "bio": "I am Diana Evans, I am 32 years old",
+                "email": "diana@example.com",
+                "password": "diana1234",
+                "adress": "303 Elm Drive, Newplace, USA",
+                "phone": "678-901-2345",
+                "roleId": "1",
+                "avatar":"https://example.com/avatar.jpg"
+            },
+            {
+                "id": 7,
+                "userName": "Evan Green",
+                "bio": "I am Evan Green, I am 27 years old",
+                "email": "evan@example.com",
+                "password": "evan1234",
+                "adress": "404 Spruce Way, Hometown, USA",
+                "phone": "789-012-3456",
+                "roleId": "1",
+                "avatar":"https://example.com/avatar.jpg"
+            },
+            {
+                "id": 8,
+                "userName": "Fiona Hill",
+                "bio": "I am Fiona Hill, I am 29 years old",
+                "email": "fiona@example.com",
+                "password": "fiona1234",
+                "adress": "505 Cedar Boulevard, Elsewhere, USA",
+                "phone": "890-123-4567",
+                "roleId": "1",
+                "avatar":"https://example.com/avatar.jpg"
+            },
+            {
+                "id": 9,
+                "userName": "George King",
+                "bio": "I am George King, I am 33 years old",
+                "email": "george@example.com",
+                "password": "george1234",
+                "adress": "606 Willow Street, Dreamland, USA",
+                "phone": "901-234-5678",
+                "roleId": "1",
+                "avatar":"https://example.com/avatar.jpg"
+            },
+            {
+                "id": 10,
+                "userName": "Hannah Lee",
+                "bio": "I am Hannah Lee, I am 26 years old",
+                "email": "hannah@example.com",
+                "password": "hannah1234",
+                "adress": "707 Aspen Court, Wonderland, USA",
+                "phone": "012-345-6789",
+                "roleId": "1",
+                "avatar":"https://example.com/avatar.jpg"
+            }
+        ],
+    "role":[
+            {
+                "id": 0,
+                "roleName": "Admin"
+            },
+            {
+                "id": 1,
+                "roleName": "User"
+            }
+        ],
+    "post":[
+            {
+                "id": 1,
+                "title": "Post 1",
+                "description": "This is the content of post 1",
+                "image": "https://example.com/post1.jpg",
+                "favoriteCount": 0,
+                "createdTime": "2022-01-01",
+                "userId": 1,
+                "categoryId": 1
+            },  
+            {
+                "id": 2,
+                "title": "Post 2",
+                "description": "This is the content of post 2",
+                "image": "https://example.com/post2.jpg",
+                "favoriteCount": 5,
+                "createdTime": "2022-02-01",
+                "userId": 2,
+                "categoryId": 2
+            },
+            {
+                "id": 3,
+                "title": "Post 3",
+                "description": "This is the content of post 3",
+                "image": "https://example.com/post3.jpg",
+                "favoriteCount": 8,
+                "createdTime": "2022-03-01",
+                "userId": 3,
+                "categoryId": 3
+            },
+            {
+                "id": 4,
+                "title": "Post 4",
+                "description": "This is the content of post 4",
+                "image": "https://example.com/post4.jpg",
+                "favoriteCount": 3,
+                "createdTime": "2022-04-01",
+                "userId": 4,
+                "categoryId": 3
+            },
+            {
+                "id": 5,
+                "title": "Post 5",
+                "description": "This is the content of post 5",
+                "image": "https://example.com/post5.jpg",
+                "favoriteCount": 10,
+                "createdTime": "2022-05-01",
+                "userId": 5,
+                "categoryId": 2
+            },
+            {
+                "id": 6,
+                "title": "Post 6",
+                "description": "This is the content of post 6",
+                "image": "https://example.com/post6.jpg",
+                "favoriteCount": 0,
+                "createdTime": "2022-06-01",
+                "userId": 6,
+                "categoryId": 3
+            },
+            {
+                "id": 7,
+                "title": "Post 7",
+                "description": "This is the content of post 7",
+                "image": "https://example.com/post7.jpg",
+                "favoriteCount": 2,
+                "createdTime": "2022-07-01",
+                "userId": 7,
+                "categoryId": 4
+            },
+            {
+                "id": 8,
+                "title": "Post 8",
+                "description": "This is the content of post 8",
+                "image": "https://example.com/post8.jpg",
+                "favoriteCount": 6,
+                "createdTime": "2022-08-01",
+                "userId": 8,
+                "categoryId": 5
+            },
+            {
+                "id": 9,
+                "title": "Post 9",
+                "description": "This is the content of post 9",
+                "image": "https://example.com/post9.jpg",
+                "favoriteCount": 4,
+                "createdTime": "2022-09-01",
+                "userId": 9,
+                "categoryId": 4
+            },
+            {
+                "id": 10,
+                "title": "Post 10",
+                "description": "This is the content of post 10",
+                "image": "https://example.com/post10.jpg",
+                "favoriteCount": 7,
+                "createdTime": "2022-10-01",
+                "userId": 10,
+                "categoryId": 2
+            },
+            {
+                "id": 11,
+                "title": "Post 11",
+                "description": "This is the content of post 11",
+                "image": "https://example.com/post11.jpg",
+                "favoriteCount": 9,
+                "createdTime": "2022-11-01",
+                "userId": 1,
+                "categoryId": 1
+            }
+        ],
+    "category":[
+            {
+                "id": 1,
+                "categoryName": "IT"
+            },
+            {
+                "id": 2,
+                "categoryName": "Question"
+            },
+            {
+                "id": 3,
+                "categoryName": "Cooking"
+            },
+            {
+                "id": 4,
+                "categoryName": "Travlling"
+            },
+            {
+                "id": 5,
+                "categoryName": "Car"
+            }
+        ],
+    "comment":[
+            {
+                "id": 1,
+                "content": "Great post!",
+                "createdTime": "2022-01-01 10:00:00",
+                "image": "https://example.com/avatar.jpg",
+                "userId": 1,
+                "postId": 1
+            },
+            {
+                "id": 2,
+                "content": "Thanks for the tip!",
+                "createdTime": "2022-01-02 11:00:00",
+                "image": "https://example.com/avatar.jpg",
+                "userId": 2,
+                "postId": 1
+            },
+            {
+                "id": 3,
+                "content": "I agree with this post.",
+                "createdTime": "2022-01-02 12:00:00",
+                "image": "https://example.com/avatar.jpg",            
+                "userId": 3,
+                "postId": 1
+            },
+            {
+                "id": 4,
+                "content": "This post is very interesting.",
+                "createdTime": "2022-01-04 23:00:00",
+                "image": "https://example.com/avatar.jpg",
+                "userId": 4,
+                "postId": 2
+            },
+            {
+                "id": 5,
+                "content": "I totally agree with this post.",
+                "createdTime": "2022-01-05 00:00:00",
+                "image": "https://example.com/avatar.jpg",
+                "userId": 5,
+                "postId": 2
+            }
+        ]   
+}

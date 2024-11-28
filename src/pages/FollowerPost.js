@@ -41,28 +41,34 @@ const FollowerPost = () => {
         <div>
             <Header />
             <Container className="mt-5 pt-5">
-                
                 {error && <p className="text-danger text-center">{error}</p>}
-                <div className="row">
+                <div className="row row-cols-1 row-cols-md-3 g-4">
                     {posts.length > 0 ? (
                         posts.map((post) => (
-                            <div className="col-md-4 mb-4" key={post.pid}>
-                                <Card style={{ width: "100%" }}>
-                                    <Card.Body>
-                                        <Card.Title>{post.title}</Card.Title>
-                                        <Card.Text>{post.description}</Card.Text>
-                                        <Card.Text>
-                                            <strong>Favorite Count:</strong> {post.favoriteCount}
+                            <div className="col d-flex">
+                                <Card className="h-100 shadow-lg border-0 w-100">
+                                    <Card.Body className="d-flex flex-column">
+                                        <Card.Title className="text-primary fw-bold">{post.title}</Card.Title>
+                                        <Card.Text className="text-muted flex-grow-1">
+                                            {post.description.length > 100
+                                                ? `${post.description.substring(0, 100)}...`
+                                                : post.description}
                                         </Card.Text>
-                                        <Card.Text>
-                                            <strong>Created Time:</strong> {new Date(post.createdTime).toLocaleString()}
-                                        </Card.Text>
-                                        <Button
-                                            variant="primary"
-                                            onClick={() => navigate(`/post/${post.id}`)}
-                                        >
-                                            View Post
-                                        </Button>
+                                        <div>
+                                            <Card.Text className="text-secondary mb-2">
+                                                <small><strong>Favorites:</strong> {post.favoriteCount}</small>
+                                            </Card.Text>
+                                            <Card.Text className="text-secondary mb-3">
+                                                <small><strong>Created:</strong> {new Date(post.createdTime).toLocaleString()}</small>
+                                            </Card.Text>
+                                            <Button
+                                                variant="primary"
+                                                className="w-100"
+                                                onClick={() => navigate(`/post/${post.id}`)}
+                                            >
+                                                View Post
+                                            </Button>
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </div>

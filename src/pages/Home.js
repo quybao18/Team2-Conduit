@@ -12,31 +12,70 @@ function Home() {
     const [posts, setPosts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [comments, setComments] = useState([]);
+    const [favorite, setFavorite] = useState([]);
     const [search, setSearch] = useState('');
     const [selectedCate, setSelectedCate] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 5;
 
+    const [authentication, setAuthentication] = useState(null);
+    const [userId, setUserId] = useState(null);
+    const [postId, setPostId] = useState(null);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                const authenData = localStorage.getItem('user');
+                if (authenData) {
+                    setAuthentication(JSON.parse(authenData));
+                }
+
                 const usersResponse = await axios.get('http://localhost:9999/user');
                 const postsResponse = await axios.get('http://localhost:9999/post');
                 const categoriesResponse = await axios.get('http://localhost:9999/category');
                 const commentsResponse = await axios.get('http://localhost:9999/comment');
+                const favoriteResponse = await axios.get('http://localhost:9999/favorite');
                 setUsers(usersResponse.data);
                 setPosts(postsResponse.data);
                 setCategories(categoriesResponse.data);
                 setComments(commentsResponse.data);
+                setFavorite(favoriteResponse.data);
             } catch (error) {
                 console.log(error);
             }
         }
         fetchData();
     }, [])
+
+    const toggleHeart = async (postId) => {
+        try {
+            if (authentication === null) {
+                alert('Please login to favorite');
+                return;
+            }
+
+            const favoriteItem = favorite.find(
+                (fav) => fav.postId === postId && fav.userId === authentication.id
+            );
+
+            if (favoriteItem) {
+                await axios.delete(`http://localhost:9999/favorite/${favoriteItem.id}`);
+                setFavorite(favorite.filter((fav) => fav.id !== favoriteItem.id));
+            } else {
+                const response = await axios.post('http://localhost:9999/favorite', {
+                    userId: authentication.id,
+                    postId: postId,
+                });
+                setFavorite([...favorite, response.data]);
+            }
+        } catch (error) {
+            console.error('Error updating favorite:', error);
+        }
+    };
+
 
 
     const filterPosts = posts.filter((post) => {
@@ -66,6 +105,16 @@ function Home() {
     useEffect(() => {
         setCurrentPage(1);
     }, [search, selectedCate])
+
+
+    const getFavoriteCount = (postId) => {
+        return favorite.filter(fav => fav.postId === postId).length;
+    };
+
+    const isPostFavorited = (postId) => {
+        return favorite?.some(fav => fav?.postId === postId && fav?.userId === authentication?.id);
+    };
+
 
 
     return (
@@ -129,7 +178,7 @@ function Home() {
                                                 }}
                                             >
                                                 {
-                                                    users.find(user => user.id === post.userId)?.userName 
+                                                    users.find(user => user.id === post.userId)?.userName
                                                 }
                                             </p>
                                             <small className="text-muted">{post.createdTime}</small>
@@ -158,16 +207,18 @@ function Home() {
                                     style={{ gap: '10px' }}
                                 >
                                     <Button
-                                        variant="outline-success"
+                                        variant={isPostFavorited(post?.id) ? "success" : "outline-success"} 
                                         size="sm"
                                         style={{
                                             fontSize: '0.8rem',
                                             display: 'flex',
                                             alignItems: 'center',
                                         }}
+                                        onClick={() => toggleHeart(post.id)} 
                                     >
-                                        ❤ {post.favoriteCount}
+                                        ❤ {getFavoriteCount(post.id)}
                                     </Button>
+
                                     <br />
                                     <Badge
                                         bg="light"
@@ -189,8 +240,6 @@ function Home() {
                     </div>
                 </div>
 
-
-
                 <div className="col-lg-3">
                     <h2 className="mb-4">🔥 Popular Tags</h2>
                     <div
@@ -201,7 +250,7 @@ function Home() {
                             overflowY: 'scroll',
                             border: '1px solid #ddd',
                         }}
-                    >   
+                    >
                         <Badge
                             bg="dark"
                             className="m-1 p-2"

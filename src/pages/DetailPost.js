@@ -40,7 +40,7 @@ function DetailPost() {
                 if (authenData) {
                     const currentUserId = JSON.parse(authenData).id;
                     const isUserFollowing = followingResponse.data.some((follow) => follow.followerId === currentUserId && follow.followingId === postResponse.data.userId);
-                    const followerId= followingResponse.data.filter((follow) => follow.followerId === currentUserId && follow.followingId === postResponse.data.userId);
+                    const followerId = followingResponse.data.filter((follow) => follow.followerId === currentUserId && follow.followingId === postResponse.data.userId);
                     setFollowerId(followerId[0].id);
                     setIsFollowing(isUserFollowing);
                 }
@@ -50,7 +50,7 @@ function DetailPost() {
         }
         fetchData();
     }, [pid]);
-     console.log(followerId);
+    console.log(followerId);
     const toggleFollow = async () => {
         try {
             if (authentication === null) {
@@ -58,26 +58,27 @@ function DetailPost() {
                 navigate('/login');
                 return;
             }
-            if (isFollowing){
+            if (isFollowing) {
                 //unfollow 
                 await axios.delete(`http://localhost:9999/follower/${followerId}`);
-                    
+
             } else {
                 //follow
                 await axios.post('http://localhost:9999/follower', {
+
                     followerId: authentication.id,
                     followingId: post.userId
                 });
-                }
+            }
             setIsFollowing(!isFollowing);
             navigate(0);
-            } catch (error) {
-                console.log(error);
-            }
+        } catch (error) {
+            console.log(error);
+        }
 
-        } 
-        
-    
+    }
+
+
 
     const formatDate = (date) => {
         const year = date.getFullYear();
@@ -171,13 +172,13 @@ function DetailPost() {
                                     </h5>
                                     <small className="text-muted" style={{ textAlign: 'left', display: 'block' }}>{post.createdTime}</small>
                                 </div>
-                                { authentication?.id !== post.userId && (
-                                 <Button style={{ marginLeft: 'auto' }} variant={isFollowing ? "danger" : "primary"} onClick={toggleFollow}>
+                                {authentication?.id !== post.userId && (
+                                    <Button style={{ marginLeft: 'auto' }} variant={isFollowing ? "danger" : "primary"} onClick={toggleFollow}>
                                         {isFollowing ? "Unfollow" : "Follow"}
-                                     </Button>)}
+                                    </Button>)}
                             </div>
-                            
-                                 
+
+
 
                             <div className="d-flex flex-column align-items-start">
                                 <h3 className=" fw-bold text-primary mb-3 w-100">
@@ -238,7 +239,7 @@ function DetailPost() {
                                                         <small className="text-muted">{comment.createdTime}</small>
                                                     </Col>
                                                     {
-                                                        (authentication?.id === comment.userId) ?  (
+                                                        (authentication?.id === comment.userId) ? (
                                                             <>
                                                                 <Col xs="auto">
                                                                     <FaTrash

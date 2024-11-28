@@ -16,6 +16,7 @@ import ManaAccount from './admin/ManaAccount';
 import ManaCategory from './admin/ManaCategory';
 import UpdateRole from './admin/UpdateRole';
 import FollowerPost from './pages/FollowerPost';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path='*' element={<ErrorPage/>}/>
 
         {/* UI USER */}
+        <Route path='/forgotPassword' element={<ForgotPassword/>}/>
         <Route path='/mypost/:uid' element={<MyPost/>}/>
         <Route path='/myfavorite/:uid' element={<MyFavorite/>}/>
         <Route path='/profile/:uid' element={<Profile/>}/>     

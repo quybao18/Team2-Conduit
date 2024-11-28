@@ -12,6 +12,7 @@ function MyPost() {
     const [user, setUser] = useState({})
     const [posts, setPosts] = useState([]);
     const [category, setCategory] = useState([]);
+    const [favorite, setFavorite] = useState([]);
 
     const navigate = useNavigate();
 
@@ -21,15 +22,25 @@ function MyPost() {
                 const userResponse = await axios.get(`http://localhost:9999/user/${uid}`);
                 const postsResponse = await axios.get('http://localhost:9999/post');
                 const categoryResponse = await axios.get('http://localhost:9999/category');
+                const favoriteResponse = await axios.get('http://localhost:9999/favorite');
                 setUser(userResponse.data);
                 setPosts(postsResponse.data);
                 setCategory(categoryResponse.data);
+                setFavorite(favoriteResponse.data);
             } catch (error) {
                 console.log(error);
             }
         }
         fetchData();
     }, [uid])
+
+    const getFavoriteCount = (postId) => {
+        return favorite.filter(fav => fav.postId === postId).length;
+    }
+
+    const isPostFavorited = (postId) => {
+        return favorite?.some(fav => fav?.postId === postId && fav?.userId === user?.id);
+    }
 
     const handleDelete = async (pid) => {
         const confirm = window.confirm('Are you sure you want to delete this post?');
@@ -116,16 +127,16 @@ function MyPost() {
                                         style={{ gap: '10px' }}
                                     >
                                         <Button
-                                            variant="outline-success"
-                                            size="sm"
-                                            style={{
-                                                fontSize: '0.8rem',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                            }}
-                                        >
-                                            ❤ {post.favoriteCount}
-                                        </Button>
+                                                variant={isPostFavorited(post?.id) ? "success" : "outline-success"} 
+                                                size="sm"
+                                                style={{
+                                                    fontSize: '0.8rem',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                ❤ {getFavoriteCount(post.id)}
+                                            </Button>
                                         <br />
                                         <Badge
                                             bg="light"

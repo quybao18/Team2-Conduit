@@ -16,7 +16,8 @@ function DetailPost() {
     const [comments, setComments] = useState([]);
 
     const [authentication, setAuthentication] = useState(null);
-
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [followerId, setFollowerId] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,16 +32,52 @@ function DetailPost() {
                 const postResponse = await axios.get(`http://localhost:9999/post/${pid}`);
                 const categoryResponse = await axios.get('http://localhost:9999/category');
                 const commentsResponse = await axios.get('http://localhost:9999/comment');
+                const followingResponse = await axios.get('http://localhost:9999/follower');
                 setUser(userResponse.data);
                 setPost(postResponse.data);
                 setCategory(categoryResponse.data);
                 setComments(commentsResponse.data);
+                if (authenData) {
+                    const currentUserId = JSON.parse(authenData).id;
+                    const isUserFollowing = followingResponse.data.some((follow) => follow.followerId === currentUserId && follow.followingId === postResponse.data.userId);
+                    const followerId= followingResponse.data.filter((follow) => follow.followerId === currentUserId && follow.followingId === postResponse.data.userId);
+                    setFollowerId(followerId[0].id);
+                    setIsFollowing(isUserFollowing);
+                }
             } catch (error) {
                 console.log(error);
             }
         }
         fetchData();
     }, [pid]);
+     console.log(followerId);
+    const toggleFollow = async () => {
+        try {
+            if (authentication === null) {
+                alert('Please login to follow');
+                navigate('/login');
+                return;
+            }
+            if (isFollowing){
+                //unfollow 
+                await axios.delete(`http://localhost:9999/follower/${followerId}`);
+                    
+            } else {
+                //follow
+                await axios.post('http://localhost:9999/follower', {
+                    followerId: authentication.id,
+                    followingId: post.userId
+                });
+                }
+            setIsFollowing(!isFollowing);
+            navigate(0);
+            } catch (error) {
+                console.log(error);
+            }
+
+        } 
+        
+    
 
     const formatDate = (date) => {
         const year = date.getFullYear();
@@ -134,7 +171,13 @@ function DetailPost() {
                                     </h5>
                                     <small className="text-muted" style={{ textAlign: 'left', display: 'block' }}>{post.createdTime}</small>
                                 </div>
+                                { authentication?.id !== post.userId && (
+                                 <Button style={{ marginLeft: 'auto' }} variant={isFollowing ? "danger" : "primary"} onClick={toggleFollow}>
+                                        {isFollowing ? "Unfollow" : "Follow"}
+                                     </Button>)}
                             </div>
+                            
+                                 
 
                             <div className="d-flex flex-column align-items-start">
                                 <h3 className=" fw-bold text-primary mb-3 w-100">

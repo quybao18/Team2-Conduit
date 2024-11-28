@@ -14,6 +14,7 @@ import MyFavorite from './pages/MyFavorite';
 import Setting from './admin/Dashboad';
 import ManaAccount from './admin/ManaAccount';
 import ManaCategory from './admin/ManaCategory';
+import FollowerPost from './pages/FollowerPost';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path='/manaAccount' element={<ManaAccount/>}/>
         <Route path='/manaCategory' element={<ManaCategory/>}/>
         <Route path='*' element={<ErrorPage/>}/>
+        <Route path='/follower/:uid' element={<FollowerPost/>}/>
         
       </Routes>
       </BrowserRouter>

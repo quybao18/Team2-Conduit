@@ -347,5 +347,27 @@
       "userId": 3,
       "postId": 3
     }
+  ],
+  "follower": [
+    {
+      "id": 2,
+      "followerId": 1,
+      "followingId": 3
+    },
+    {
+      "id": 3,
+      "followerId": 1,
+      "followingId": 4
+    },
+    {
+      "followerId": 1,
+      "followingId": 9,
+      "id": 5
+    },
+    {
+      "followerId": 1,
+      "followingId": 11,
+      "id": 6
+    }
   ]
 }

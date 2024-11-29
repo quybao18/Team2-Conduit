@@ -157,12 +157,14 @@ function Home() {
                                                         style={{
                                                             width: '50px',
                                                             height: '50px',
+                                                            cursor: 'pointer',
                                                             borderRadius: '50%',
                                                             backgroundColor: '#ddd',
                                                             backgroundImage: `url(../images/${user.avatar}.png)`,
                                                             backgroundSize: 'cover',
                                                             backgroundPosition: 'center',
                                                         }}
+                                                        onClick={() => navigate(`/viewPosts/${user.id}`)}
                                                     ></div>
                                                 }
                                             })

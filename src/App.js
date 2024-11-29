@@ -17,6 +17,8 @@ import ManaCategory from './admin/ManaCategory';
 import UpdateRole from './admin/UpdateRole';
 import FollowerPost from './pages/FollowerPost';
 import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
+import ViewPostUsers from './pages/ViewPostUsers';
 
 function App() {
   return (
@@ -29,10 +31,12 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/' element={<Home/>}/>
         <Route path='/post/:pid' element={<DetailPost/>}/> 
+        <Route path='/viewPosts/:uid' element={<ViewPostUsers/>}/>
         <Route path='*' element={<ErrorPage/>}/>
 
         {/* UI USER */}
         <Route path='/forgotPassword' element={<ForgotPassword/>}/>
+        <Route path='/resetPassword' element={<ResetPassword/>}/>
         <Route path='/mypost/:uid' element={<MyPost/>}/>
         <Route path='/myfavorite/:uid' element={<MyFavorite/>}/>
         <Route path='/profile/:uid' element={<Profile/>}/>     

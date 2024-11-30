@@ -1,6 +1,7 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
-import { FaChartBar, FaUser, FaUsersCog, FaLayerGroup } from "react-icons/fa";
+import { FaChartBar, FaUser, FaUsersCog, FaLayerGroup, FaBell, FaEnvelope, FaFileAlt, FaExclamationTriangle, FaCommentDots } from "react-icons/fa";
+import { MdReport } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
@@ -31,10 +32,29 @@ function Sidebar() {
                     <FaUsersCog className="me-2" /> Manage Accounts
                 </Nav.Link>
                 <Nav.Link
-                    className="text-white mb-3 d-flex align-items-center"
+                    className="text-white d-flex align-items-center"
                     onClick={() => navigate('/manaCategory')}
                 >
                     <FaLayerGroup className="me-2" /> Manage Category
+                </Nav.Link>
+                <Nav.Link
+                    className="text-white d-flex align-items-center"
+                    onClick={() => navigate('/manaPost')}
+                >
+                    <FaFileAlt className="me-2" /> Manage Posts
+                </Nav.Link>
+                <Nav.Link
+                    className="text-white d-flex align-items-center"
+                    onClick={() => navigate('/manaComment')}
+                >
+                    <FaCommentDots className="me-2" /> Manage Comments
+                </Nav.Link>
+
+                <Nav.Link
+                    className="text-white mb-3 d-flex align-items-center"
+                    onClick={() => navigate('/report')}
+                >
+                    <FaExclamationTriangle className="me-2" /> Report
                 </Nav.Link>
             </Nav>
         </div>

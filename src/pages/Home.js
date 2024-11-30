@@ -135,7 +135,7 @@ function Home() {
             </div>
 
             <div className="row mt-5 ms-5 me-5">
-                <div className="col-lg-9">
+                <div className="col-lg-9">  
                     <h2 className="mb-4 text-success">🌐 Global Feed</h2>
                     <div className="list-group">
                         {currentPosts.map((post, index) => (
@@ -221,6 +221,8 @@ function Home() {
                                         ❤ {getFavoriteCount(post.id)}
                                     </Button>
 
+                                    
+
                                     <br />
                                     <Badge
                                         bg="light"
@@ -243,7 +245,7 @@ function Home() {
                 </div>
 
                 <div className="col-lg-3">
-                    <h2 className="mb-4">🔥 Popular Tags</h2>
+                    <h2 className="mb-4">🔥 Popular Tags </h2>
                     <div
                         className="p-4 bg-light shadow-sm"
                         style={{

@@ -19,6 +19,10 @@ import FollowerPost from './pages/FollowerPost';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import ViewPostUsers from './pages/ViewPostUsers';
+import Report from './admin/Report';
+import ManaPost from './admin/ManaPost';
+import ManaComment from './admin/ManaComment';
+import SuccessReport from './pages/SuccessReport';
 
 function App() {
   return (
@@ -42,11 +46,16 @@ function App() {
         <Route path='/profile/:uid' element={<Profile/>}/>     
         <Route path='/updateProfile/:uid' element={<UpdateProfile/>}/>
         <Route path='/follower/:uid' element={<FollowerPost/>}/>
+        <Route path='/successReport' element={<SuccessReport/>}/>
 
         {/* UI ADMIN */}
         <Route path='/setting' element={<Setting/>}/>
+        <Route path='/report' element={<Report/>}/>
         <Route path='/manaAccount' element={<ManaAccount/>}/>
         <Route path='/manaCategory' element={<ManaCategory/>}/>
+        <Route path='/manaPost' element={<ManaPost/>}/>
+        <Route path='/manaComment' element={<ManaComment/>}/>
+        <Route path='/report' element={<Report/>}/>
         
       </Routes>
       </BrowserRouter>

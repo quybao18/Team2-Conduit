@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
-import { Badge, Button } from 'react-bootstrap';
+import { Badge, Button, Card, Col, Container, Row } from 'react-bootstrap';
 
 function ViewPostUsers() {
 
@@ -22,7 +22,7 @@ function ViewPostUsers() {
         const fetchData = async () => {
             try {
                 const authenData = localStorage.getItem('user');
-                if(authenData){
+                if (authenData) {
                     setAuthentication(JSON.parse(authenData));
                 }
 
@@ -41,6 +41,14 @@ function ViewPostUsers() {
         fetchData();
     }, [uid])
 
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Returns the count of favorites for a given post.
+ *
+ * @param {number} postId - The ID of the post to count favorites for.
+ * @returns {number} The number of favorites for the specified post.
+ */
+/******  5c0f3374-5b99-4f9b-9955-d776714d7707  *******/
     const getFavoriteCount = (postId) => {
         return favorite.filter(fav => fav.postId === postId).length;
     }
@@ -49,113 +57,176 @@ function ViewPostUsers() {
         return favorite?.some(fav => fav?.postId === postId && fav?.userId === authentication?.id);
     }
 
+    const countPosts = posts.filter(post => post.userId === user.id).length;
+
     return (
         <div>
-        <Header />
-        <div className="row mt-5 ms-5 me-5">
-            <h3 className='mt-5'>{user.userName} Post</h3>
-            <div className="list-group mt-5">
-                {
-                    posts.map((post, index) => {
-                        if (post.userId === user.id) {
-                            return <div
-                                key={index}
-                                className="list-group-item d-flex justify-content-between align-items-start py-3 px-4 mb-3 shadow-sm"
+            <Header />
+            <div style={{ backgroundColor: '#f8f9fa', padding: '20px 0', width: '100vw' }}>
+                <Container fluid className="py-4 mt-5">
+                    <Row className="align-items-center justify-content-center">
+                        <Col xs={12} md={3} className="text-center">
+                            <div
                                 style={{
-                                    borderRadius: '10px',
-                                    border: '1px solid #ddd',
-                                    backgroundColor: '#fff',
+                                    width: '180px',
+                                    height: '180px',
+                                    cursor: 'pointer',
+                                    borderRadius: '50%',
+                                    backgroundColor: '#ddd',
+                                    backgroundImage: `url(../images/${user.avatar}.png)`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                }}
+                                onClick={() => navigate(`/viewPosts/${user.id}`)}
+                            ></div>
+                        </Col>
+
+                        <Col xs={12} md={6} className="text-center text-md-start">
+                            <h3
+                                style={{
+                                    fontWeight: 'bold',
+                                    color: '#343a40',
                                 }}
                             >
-                                <div className="d-flex flex-column justify-content-start align-items-start w-75">
-                                    <div className="d-flex align-items-center mb-3">
-                                        <div
-                                            style={{
-                                                width: '50px',
-                                                height: '50px',
-                                                borderRadius: '50%',
-                                                backgroundColor: '#ddd',
-                                                backgroundImage: `url(../images/${user.avatar}.png)`,
-                                                backgroundSize: 'cover',
-                                                backgroundPosition: 'center',
-                                            }}
-                                        ></div>
+                                {user.userName}
+                            </h3>
+                            <p
+                                className="text-muted"
+                                style={{
+                                    fontSize: '1rem',
+                                    lineHeight: '1.6',
+                                    maxWidth: '600px',
+                                    margin: '10px auto 0',
+                                }}
+                            >
+                                {user.bio}
+                            </p>
+                            <h5
+                                className="mt-3"
+                                style={{
+                                    fontWeight: 'bold',
+                                    color: '#28a745',
+                                }}
+                            >
+                                Total Posts: <span style={{ color: '#000' }}>{countPosts}</span>
+                            </h5>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
 
-
-                                        <div className="ms-3">
-                                            <p
-                                                className="mb-1"
-                                                style={{
-                                                    fontSize: '1rem',
-                                                    color: '#28a745',
-                                                    fontWeight: '600',
-                                                    textAlign: 'left'
-                                                }}
-                                            >
-                                                {user.userName}
-                                            </p>
-                                            <small className="text-muted">{post.createdTime}</small>
-                                        </div>
-                                    </div>
-
-                                    <div className="mb-3">
-                                        <h5 className="mb-2" style={{ fontWeight: '600', textAlign: 'left' }}>{post.title}</h5>
-                                        <p
-                                            className="text-muted mb-2"
-                                            style={{
-                                                fontSize: '0.9rem',
-                                                lineHeight: '1.4',
-                                                textAlign: 'left'
-                                            }}
-                                        >
-                                            {post.description}
-                                        </p>
-                                        <a className='direction p-0' size="sm" style={{ cursor: 'pointer', display: 'block', textAlign: 'left', textDecoration: 'none' }}
-                                            onClick={() => navigate(`/post/${post.id}`)}>Read more...</a>
-                                    </div>
-                                </div>
-
-                                <div
-                                    className="d-flex flex-column align-items-end justify-content-start w-25 mt-3"
-                                    style={{ gap: '10px' }}
-                                >
-                                    <Button
-                                            variant={isPostFavorited(post?.id) ? "success" : "outline-success"} 
-                                            size="sm"
-                                            style={{
-                                                fontSize: '0.8rem',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                            }}
-                                        >
-                                            ❤ {getFavoriteCount(post.id)}
-                                        </Button>
-                                    <br />
-                                    <Badge
-                                        bg="light"
-                                        className="text-secondary d-block mb-2 mt-5"
+            <div className="row mt-5 ms-5 me-5">
+                <div className="list-group mt-5">
+                    {
+                        posts.map((post, index) => {
+                            if (post.userId === user.id) {
+                                return (
+                                    <div
+                                        key={index}
+                                        className="list-group-item d-flex justify-content-between align-items-start py-3 px-4 mb-3 shadow-sm"
                                         style={{
-                                            fontSize: '0.8rem',
-                                            border: '1px solid #ddd',
-                                            padding: '0.3rem 0.6rem',
                                             borderRadius: '10px',
+                                            border: '1px solid #ddd',
+                                            backgroundColor: '#fff',
                                         }}
                                     >
-                                        {
-                                            categories.find((cate) => cate.id === post.categoryId)?.categoryName
-                                        }
-                                    </Badge>
-                                </div>
-                            </div>
-                        }
+                                        <div className="d-flex flex-column justify-content-start align-items-start w-75">
+                                            <div className="d-flex align-items-center mb-3">
+                                                <div
+                                                    style={{
+                                                        width: '50px',
+                                                        height: '50px',
+                                                        borderRadius: '50%',
+                                                        backgroundColor: '#ddd',
+                                                        backgroundImage: `url(../images/${user.avatar}.png)`,
+                                                        backgroundSize: 'cover',
+                                                        backgroundPosition: 'center',
+                                                    }}
+                                                ></div>
+                                                <div className="ms-3">
+                                                    <p
+                                                        className="mb-1"
+                                                        style={{
+                                                            fontSize: '1rem',
+                                                            color: '#28a745',
+                                                            fontWeight: '600',
+                                                            textAlign: 'left',
+                                                        }}
+                                                    >
+                                                        {user.userName}
+                                                    </p>
+                                                    <small className="text-muted">{post.createdTime}</small>
+                                                </div>
+                                            </div>
 
-                    })
-                }
+                                            <div className="mb-3">
+                                                <h5 className="mb-2" style={{ fontWeight: '600', textAlign: 'left' }}>{post.title}</h5>
+                                                <p
+                                                    className="text-muted mb-2"
+                                                    style={{
+                                                        fontSize: '0.9rem',
+                                                        lineHeight: '1.4',
+                                                        textAlign: 'left',
+                                                    }}
+                                                >
+                                                    {post.description}
+                                                </p>
+                                                <a
+                                                    className="direction p-0"
+                                                    size="sm"
+                                                    style={{
+                                                        cursor: 'pointer',
+                                                        display: 'block',
+                                                        textAlign: 'left',
+                                                        textDecoration: 'none',
+                                                    }}
+                                                    onClick={() => navigate(`/post/${post.id}`)}
+                                                >
+                                                    Read more...
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className="d-flex flex-column align-items-end justify-content-start w-25 mt-3"
+                                            style={{ gap: '10px' }}
+                                        >
+                                            <Button
+                                                variant={isPostFavorited(post?.id) ? 'success' : 'outline-success'}
+                                                size="sm"
+                                                style={{
+                                                    fontSize: '0.8rem',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                ❤ {getFavoriteCount(post.id)}
+                                            </Button>
+                                            <br />
+                                            <Badge
+                                                bg="light"
+                                                className="text-secondary d-block mb-2 mt-5"
+                                                style={{
+                                                    fontSize: '0.8rem',
+                                                    border: '1px solid #ddd',
+                                                    padding: '0.3rem 0.6rem',
+                                                    borderRadius: '10px',
+                                                }}
+                                            >
+                                                {categories.find((cate) => cate.id === post.categoryId)?.categoryName}
+                                            </Badge>
+                                        </div>
+                                    </div>
+                                );
+                            }
+                        })
+                    }
+                </div>
             </div>
+
+            <Footer />
         </div>
 
-        <Footer />
-    </div>
     )
 }
 

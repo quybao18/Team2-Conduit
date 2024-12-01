@@ -18,7 +18,7 @@ function Register() {
         bio: '',
         email: '',
         password: '',
-        adress: '',
+        address: '',
         phone: '',
         roleId: 1,
         avatar: ''

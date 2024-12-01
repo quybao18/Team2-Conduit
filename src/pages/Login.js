@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
 
@@ -26,11 +26,11 @@ function Login() {
     const handleLogin = (e) => {
         e.preventDefault();
         const user = users.find(user => user.email === email && user.password === password);
-        if(user){
+        if (user) {
             localStorage.setItem('user', JSON.stringify(user));
             alert('Login successful');
             navigate('/');
-        }else{
+        } else {
             alert('Invalid email or password');
         }
     }
@@ -39,7 +39,7 @@ function Login() {
     const handleChange = (e) => {
         if (e.target.name === 'email') {
             setEmail(e.target.value);
-        }else{
+        } else {
             setPassword(e.target.value);
         }
     }
@@ -85,11 +85,11 @@ function Login() {
                                                 >
                                                     Email address
                                                 </label>
-                                                <input type="email" 
-                                                id="form2Example17" 
-                                                className="form-control form-control-lg" 
-                                                name='email' value={email}
-                                                onChange={handleChange}/>
+                                                <input type="email"
+                                                    id="form2Example17"
+                                                    className="form-control form-control-lg"
+                                                    name='email' value={email}
+                                                    onChange={handleChange} />
                                             </div>
 
                                             <div data-mdb-input-init className="form-outline mb-4">
@@ -107,11 +107,11 @@ function Login() {
                                                 >
                                                     Password
                                                 </label>
-                                                <input type="password" 
-                                                id="form2Example27" 
-                                                className="form-control form-control-lg" 
-                                                name='password' value={password}
-                                                onChange={handleChange}/>
+                                                <input type="password"
+                                                    id="form2Example27"
+                                                    className="form-control form-control-lg"
+                                                    name='password' value={password}
+                                                    onChange={handleChange} />
                                             </div>
 
                                             <div className="pt-1 mb-4">

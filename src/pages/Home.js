@@ -129,7 +129,7 @@ function Home() {
                                                 }}
                                             >
                                                 {
-                                                    users.find(user => user.id === post.userId)?.userName
+                                                    users.find(user => user.id === post.userId)?.userName 
                                                 }
                                             </p>
                                             <small className="text-muted">{post.createdTime}</small>
@@ -201,7 +201,15 @@ function Home() {
                             overflowY: 'scroll',
                             border: '1px solid #ddd',
                         }}
-                    >
+                    >   
+                        <Badge
+                            bg="dark"
+                            className="m-1 p-2"
+                            style={{ fontSize: '0.9rem', borderRadius: '10px', cursor: 'pointer' }}
+                            onClick={() => handleSelectedCate(0)}
+                        >
+                            All
+                        </Badge>
                         {categories.map((cate, index) => (
                             <Badge
                                 key={index}

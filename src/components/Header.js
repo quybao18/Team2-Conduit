@@ -78,20 +78,22 @@ function Header() {
                         <FaUserAlt className="me-2" />
                         Profile
                       </Dropdown.Item>
-                      {
-                        user.roleId === 0 && (
-                          <Dropdown.Item onClick={() => navigate('/setting')}>
-                            <FaCog className="me-2" />
-                            Setting
-                          </Dropdown.Item>
-
-                        )
-                      }
+                      {user.roleId === 0 && (
+                        <Dropdown.Item onClick={() => navigate('/setting')}>
+                          <FaCog className="me-2" />
+                          Setting
+                        </Dropdown.Item>
+                      )}
+                      <Dropdown.Item onClick={() => navigate('/change-password')}>
+                        <FaUserAlt className="me-2" />
+                        Change Password
+                      </Dropdown.Item>
                       <Dropdown.Item onClick={handleLogout}>
                         <FaSignOutAlt className="me-2" />
                         Logout
                       </Dropdown.Item>
                     </Dropdown.Menu>
+
                   </Dropdown>
                 </>
               ) : (

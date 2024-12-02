@@ -28,7 +28,6 @@ function Login() {
         const user = users.find(user => user.email === email && user.password === password);
         if (user) {
             localStorage.setItem('user', JSON.stringify(user));
-            alert('Login successful');
             navigate('/');
         } else {
             alert('Invalid email or password');
@@ -125,7 +124,7 @@ function Login() {
                                                 </button>
                                             </div>
 
-                                            <a className="small text-muted" href="#!">Forgot password?</a>
+                                            <a className="small text-muted" style={{cursor: 'pointer'}} onClick={() => navigate('/forgotPassword')}>Forgot password?</a>
                                             <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
                                                 Don't have an account? <a onClick={() => navigate('/register')} style={{ color: '#393f81', cursor: 'pointer' }}>Register here</a>
                                             </p>

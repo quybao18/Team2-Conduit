@@ -1,89 +1,125 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Badge, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
+import { Badge, Button, Card, Col, Container, Row } from 'react-bootstrap';
 
-function MyFavorite() {
+function ViewPostUsers() {
+
     const { uid } = useParams();
+
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [favorite, setFavorite] = useState([]);
-    const [postUsers, setPostUsers] = useState([]);
+
+    const [authentication, setAuthentication] = useState(null);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                const authenData = localStorage.getItem('user');
+                if (authenData) {
+                    setAuthentication(JSON.parse(authenData));
+                }
+
                 const userResponse = await axios.get(`http://localhost:9999/user/${uid}`);
                 const postsResponse = await axios.get('http://localhost:9999/post');
                 const categoriesResponse = await axios.get('http://localhost:9999/category');
                 const favoriteResponse = await axios.get('http://localhost:9999/favorite');
-
                 setUser(userResponse.data);
                 setPosts(postsResponse.data);
                 setCategories(categoriesResponse.data);
                 setFavorite(favoriteResponse.data);
-
-                const users = await Promise.all(postsResponse.data.map(async (post) => {
-                    const userResponse = await axios.get(`http://localhost:9999/user/${post.userId}`);
-                    return { postId: post.id, user: userResponse.data };
-                }));
-                setPostUsers(users);
             } catch (error) {
                 console.log(error);
             }
-        };
-
+        }
         fetchData();
-    }, [uid]);
+    }, [uid])
 
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Returns the count of favorites for a given post.
+ *
+ * @param {number} postId - The ID of the post to count favorites for.
+ * @returns {number} The number of favorites for the specified post.
+ */
+/******  5c0f3374-5b99-4f9b-9955-d776714d7707  *******/
     const getFavoriteCount = (postId) => {
         return favorite.filter(fav => fav.postId === postId).length;
-    };
+    }
 
     const isPostFavorited = (postId) => {
-        return favorite?.some(fav => fav?.postId === postId && fav?.userId === user?.id);
-    };
+        return favorite?.some(fav => fav?.postId === postId && fav?.userId === authentication?.id);
+    }
 
-    const getPostUser = (postId) => {
-        const postUser = postUsers.find(user => user.postId === postId);
-        return postUser ? postUser.user : null;
-    };
-
-    const removeFavorite = async (postId) => {
-        try {
-            const favoriteToRemove = favorite.find(fav => fav.postId === postId && fav.userId === user.id);
-
-            if (!favoriteToRemove) {
-                alert("Favorite not found!");
-                return;
-            }
-
-            await axios.delete(`http://localhost:9999/favorite/${favoriteToRemove.id}`);
-
-            setFavorite(prevFavorites => prevFavorites.filter(fav => fav.id !== favoriteToRemove.id));
-
-        } catch (error) {
-            console.log('Error removing favorite:', error);
-        }
-    };
-
+    const countPosts = posts.filter(post => post.userId === user.id).length;
 
     return (
         <div>
             <Header />
+            <div style={{ backgroundColor: '#f8f9fa', padding: '20px 0', width: '100vw' }}>
+                <Container fluid className="py-4 mt-5">
+                    <Row className="align-items-center justify-content-center">
+                        <Col xs={12} md={3} className="text-center">
+                            <div
+                                style={{
+                                    width: '180px',
+                                    height: '180px',
+                                    cursor: 'pointer',
+                                    borderRadius: '50%',
+                                    backgroundColor: '#ddd',
+                                    backgroundImage: `url(../images/${user.avatar}.png)`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                }}
+                                onClick={() => navigate(`/viewPosts/${user.id}`)}
+                            ></div>
+                        </Col>
+
+                        <Col xs={12} md={6} className="text-center text-md-start">
+                            <h3
+                                style={{
+                                    fontWeight: 'bold',
+                                    color: '#343a40',
+                                }}
+                            >
+                                {user.userName}
+                            </h3>
+                            <p
+                                className="text-muted"
+                                style={{
+                                    fontSize: '1rem',
+                                    lineHeight: '1.6',
+                                    maxWidth: '600px',
+                                    margin: '10px auto 0',
+                                }}
+                            >
+                                {user.bio}
+                            </p>
+                            <h5
+                                className="mt-3"
+                                style={{
+                                    fontWeight: 'bold',
+                                    color: '#28a745',
+                                }}
+                            >
+                                Total Posts: <span style={{ color: '#000' }}>{countPosts}</span>
+                            </h5>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+
             <div className="row mt-5 ms-5 me-5">
-                <h3 className='mt-5'>My Favorite</h3>
-                <div className="list-group">
+                <div className="list-group mt-5">
                     {
                         posts.map((post, index) => {
-                            if (favorite.some(fav => fav.postId === post.id && fav.userId === user.id)) {
-                                const postUser = getPostUser(post.id);
-
+                            if (post.userId === user.id) {
                                 return (
                                     <div
                                         key={index}
@@ -102,7 +138,7 @@ function MyFavorite() {
                                                         height: '50px',
                                                         borderRadius: '50%',
                                                         backgroundColor: '#ddd',
-                                                        backgroundImage: postUser?.avatar ? `url(../images/${postUser.avatar}.png)` : 'none',
+                                                        backgroundImage: `url(../images/${user.avatar}.png)`,
                                                         backgroundSize: 'cover',
                                                         backgroundPosition: 'center',
                                                     }}
@@ -114,10 +150,10 @@ function MyFavorite() {
                                                             fontSize: '1rem',
                                                             color: '#28a745',
                                                             fontWeight: '600',
-                                                            textAlign: 'left'
+                                                            textAlign: 'left',
                                                         }}
                                                     >
-                                                        {postUser?.userName}
+                                                        {user.userName}
                                                     </p>
                                                     <small className="text-muted">{post.createdTime}</small>
                                                 </div>
@@ -130,13 +166,24 @@ function MyFavorite() {
                                                     style={{
                                                         fontSize: '0.9rem',
                                                         lineHeight: '1.4',
-                                                        textAlign: 'left'
+                                                        textAlign: 'left',
                                                     }}
                                                 >
                                                     {post.description}
                                                 </p>
-                                                <a className='direction p-0' size="sm" style={{ cursor: 'pointer', display: 'block', textAlign: 'left', textDecoration: 'none' }}
-                                                    onClick={() => navigate(`/post/${post.id}`)}>Read more...</a>
+                                                <a
+                                                    className="direction p-0"
+                                                    size="sm"
+                                                    style={{
+                                                        cursor: 'pointer',
+                                                        display: 'block',
+                                                        textAlign: 'left',
+                                                        textDecoration: 'none',
+                                                    }}
+                                                    onClick={() => navigate(`/post/${post.id}`)}
+                                                >
+                                                    Read more...
+                                                </a>
                                             </div>
                                         </div>
 
@@ -145,14 +192,13 @@ function MyFavorite() {
                                             style={{ gap: '10px' }}
                                         >
                                             <Button
-                                                variant={isPostFavorited(post?.id) ? "success" : "outline-success"}
+                                                variant={isPostFavorited(post?.id) ? 'success' : 'outline-success'}
                                                 size="sm"
                                                 style={{
                                                     fontSize: '0.8rem',
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                 }}
-                                                onClick={() => removeFavorite(post.id)}
                                             >
                                                 ❤ {getFavoriteCount(post.id)}
                                             </Button>
@@ -167,9 +213,7 @@ function MyFavorite() {
                                                     borderRadius: '10px',
                                                 }}
                                             >
-                                                {
-                                                    categories.find((cate) => cate.id === post.categoryId)?.categoryName
-                                                }
+                                                {categories.find((cate) => cate.id === post.categoryId)?.categoryName}
                                             </Badge>
                                         </div>
                                     </div>
@@ -182,7 +226,8 @@ function MyFavorite() {
 
             <Footer />
         </div>
-    );
+
+    )
 }
 
-export default MyFavorite;
+export default ViewPostUsers

@@ -185,7 +185,7 @@ function Setting() {
 
         
           <div id="chart" className="mt-5">
-            <h3 className="mb-4">Post Statistics</h3>
+            <h3 className="mb-4">Posts Statistics</h3>
             <div
               style={{
                 display: "flex",

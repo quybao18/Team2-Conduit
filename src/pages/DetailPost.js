@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Button, Form, ListGroup, InputGroup, FormControl, Card } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form, ListGroup, InputGroup, FormControl, Card, Modal } from 'react-bootstrap';
 import Header from '../components/Header';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../components/Footer';
-import { FaTrash } from 'react-icons/fa';
+import { FaFlag, FaTrash } from 'react-icons/fa';
 
 function DetailPost() {
 
@@ -14,6 +14,7 @@ function DetailPost() {
     const [post, setPost] = useState({});
     const [category, setCategory] = useState([]);
     const [comments, setComments] = useState([]);
+    const [reports, setReports] = useState([]);
 
     const [authentication, setAuthentication] = useState(null);
     const [isFollowing, setIsFollowing] = useState(false);
@@ -33,14 +34,16 @@ function DetailPost() {
                 const categoryResponse = await axios.get('http://localhost:9999/category');
                 const commentsResponse = await axios.get('http://localhost:9999/comment');
                 const followingResponse = await axios.get('http://localhost:9999/follower');
+                const reportsResponse = await axios.get('http://localhost:9999/report');
                 setUser(userResponse.data);
                 setPost(postResponse.data);
                 setCategory(categoryResponse.data);
                 setComments(commentsResponse.data);
+                setReports(reportsResponse.data);
                 if (authenData) {
                     const currentUserId = JSON.parse(authenData).id;
                     const isUserFollowing = followingResponse.data.some((follow) => follow.followerId === currentUserId && follow.followingId === postResponse.data.userId);
-                    const followerId= followingResponse.data.filter((follow) => follow.followerId === currentUserId && follow.followingId === postResponse.data.userId);
+                    const followerId = followingResponse.data.filter((follow) => follow.followerId === currentUserId && follow.followingId === postResponse.data.userId);
                     setFollowerId(followerId[0].id);
                     setIsFollowing(isUserFollowing);
                 }
@@ -50,7 +53,7 @@ function DetailPost() {
         }
         fetchData();
     }, [pid]);
-     console.log(followerId);
+    console.log(followerId);
     const toggleFollow = async () => {
         try {
             if (authentication === null) {
@@ -58,26 +61,27 @@ function DetailPost() {
                 navigate('/login');
                 return;
             }
-            if (isFollowing){
+            if (isFollowing) {
                 //unfollow 
                 await axios.delete(`http://localhost:9999/follower/${followerId}`);
-                    
+
             } else {
                 //follow
                 await axios.post('http://localhost:9999/follower', {
+
                     followerId: authentication.id,
                     followingId: post.userId
                 });
-                }
+            }
             setIsFollowing(!isFollowing);
             navigate(0);
-            } catch (error) {
-                console.log(error);
-            }
+        } catch (error) {
+            console.log(error);
+        }
 
-        } 
-        
-    
+    }
+
+
 
     const formatDate = (date) => {
         const year = date.getFullYear();
@@ -143,6 +147,57 @@ function DetailPost() {
         }
     }
 
+    const [showModal, setShowModal] = useState(false);
+    const [selectedReport, setSelectedReport] = useState(null);
+
+    const handleShowModal = (report) => {
+        setSelectedReport(report);
+        setShowModal(true);
+    }
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedReport(null);
+    }
+
+    const [addReport, setAddReport] = useState({
+        title: '',
+        description: '',
+        createdTime: '',
+        type: 'post',
+        status: 'pending',
+        pomentId: null,
+        userId: null
+    })
+
+
+    const handleChangeReport = (e) => {
+        const { name, value } = e.target;
+        setAddReport({
+            ...addReport,
+            [name]: name === 'pomentId' ? parseInt(value) : value
+        })
+    }
+
+    const handleAddReport = async (e) => {
+        e.preventDefault();
+        try {
+            const currentTime = formatDate(new Date());
+            const newReport = {
+                ...addReport,
+                id: reports.length + 1,
+                createdTime: currentTime,
+                pomentId: addReport.type === 'post' ? post.id : selectedReport?.id,
+                userId: authentication.id
+            }
+            await axios.post('http://localhost:9999/report', newReport);
+            navigate('/successReport');
+            handleCloseModal();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <Header />
@@ -171,13 +226,13 @@ function DetailPost() {
                                     </h5>
                                     <small className="text-muted" style={{ textAlign: 'left', display: 'block' }}>{post.createdTime}</small>
                                 </div>
-                                { authentication?.id !== post.userId && (
-                                 <Button style={{ marginLeft: 'auto' }} variant={isFollowing ? "danger" : "primary"} onClick={toggleFollow}>
+                                {authentication?.id !== post.userId && (
+                                    <Button style={{ marginLeft: 'auto' }} variant={isFollowing ? "danger" : "primary"} onClick={toggleFollow}>
                                         {isFollowing ? "Unfollow" : "Follow"}
-                                     </Button>)}
+                                    </Button>)}
                             </div>
-                            
-                                 
+
+
 
                             <div className="d-flex flex-column align-items-start">
                                 <h3 className=" fw-bold text-primary mb-3 w-100">
@@ -195,6 +250,21 @@ function DetailPost() {
                             <p className="fs-5 text-dark">
                                 {post.description}
                             </p>
+                            {
+                                (authentication?.id === post?.userId) ? (
+                                    <></>
+                                ) : (
+                                    <div className="d-flex justify-content-end">
+                                        <Button
+                                            variant="outline-danger"
+                                            className="d-flex align-items-center"
+                                            onClick={() => handleShowModal(post)}>
+                                            <FaFlag className="me-2" /> Report
+                                        </Button>
+                                    </div>
+                                )
+
+                            }
                         </div>
                     </Col>
                 </Row>
@@ -234,30 +304,93 @@ function DetailPost() {
                                                             {
                                                                 user.find(user => user.id === comment.userId)?.userName
                                                             }
-                                                        </span>{' '}
+                                                        </span>
                                                         <small className="text-muted">{comment.createdTime}</small>
                                                     </Col>
-                                                    {
-                                                        (authentication?.id === comment.userId) ?  (
-                                                            <>
-                                                                <Col xs="auto">
-                                                                    <FaTrash
-                                                                        className="text-danger"
-                                                                        style={{ cursor: 'pointer' }}
-                                                                        onClick={() => handleDelete(comment.id)}
-                                                                    />
-                                                                </Col>
-                                                            </>
-                                                        ) : (
-                                                            <></>
-                                                        )
-                                                    }
+                                                    <Col xs="auto" className="d-flex justify-content-end">
+                                                        {
+
+                                                            (authentication?.id === comment?.userId) ? (
+                                                                <></>
+                                                            ) : (
+                                                                <Button
+                                                                    variant="outline-warning"
+                                                                    className="d-flex align-items-center me-3"
+                                                                    style={{ padding: '0.2rem 0.4rem', fontSize: '0.9rem' }}
+                                                                    onClick={() => handleShowModal(comment)}
+                                                                >
+                                                                    <FaFlag className="me-2" /> Report
+                                                                </Button>
+                                                            )
+                                                        }
+
+                                                        {(authentication?.id === comment.userId) && (
+                                                            <FaTrash
+                                                                className="text-danger"
+                                                                style={{ cursor: 'pointer', fontSize: '1.2rem' }}
+                                                                onClick={() => handleDelete(comment.id)}
+                                                            />
+                                                        )}
+                                                    </Col>
                                                 </Row>
                                             </Card.Footer>
                                         </Card>
                                     }
                                 })
                             }
+
+                            <Modal show={showModal} onHide={handleCloseModal}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Report </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <Form onSubmit={handleAddReport}>
+                                        <Form.Group >
+                                            <Form.Label>Title</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Enter report title"
+                                                name="title"
+                                                value={addReport.title}
+                                                onChange={handleChangeReport}
+                                            />
+                                        </Form.Group>
+
+                                        <Form.Group className="mt-3">
+                                            <Form.Label>Description</Form.Label>
+                                            <Form.Control
+                                                as="textarea"
+                                                rows={3}
+                                                placeholder="Describe the issue"
+                                                name="description"
+                                                value={addReport.description}
+                                                onChange={handleChangeReport}
+                                            />
+                                        </Form.Group>
+
+                                        <Form.Group className="mt-3">
+                                            <Form.Label>Type</Form.Label>
+                                            <Form.Control
+                                                as='select'
+                                                name='type'
+                                                value={addReport.type}
+                                                onChange={handleChangeReport}
+                                            >
+                                                <option value='post'>Post</option>
+                                                <option value='comment'>Comment</option>
+                                            </Form.Control>
+                                        </Form.Group>
+                                        <Modal.Footer>
+                                            <Button variant="secondary" onClick={handleCloseModal}>
+                                                Close
+                                            </Button>
+                                            <Button variant="primary" type='submit'>
+                                                Submit
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Form>
+                                </Modal.Body>
+                            </Modal>
 
                             {
                                 authentication ? (

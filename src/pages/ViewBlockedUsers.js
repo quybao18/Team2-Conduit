@@ -106,7 +106,7 @@ const ViewBlockedUsers = () => {
                           onClick={() => handleUnblock(user.id)}
                           size="sm"
                         >
-                          <FaTrash /> Unblock
+                          Unblock
                         </Button>
                       </td>
                     </tr>
@@ -115,9 +115,6 @@ const ViewBlockedUsers = () => {
               </Table>
             )}
 
-            <Button variant="primary" onClick={fetchBlockedUsers} className="mt-3">
-              Refresh List
-            </Button>
           </Col>
         </Row>
       </Container>

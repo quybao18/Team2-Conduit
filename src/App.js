@@ -15,6 +15,7 @@ import Setting from './admin/Dashboad';
 import ManaAccount from './admin/ManaAccount';
 import ManaCategory from './admin/ManaCategory';
 import UpdateRole from './admin/UpdateRole';
+import ViewBlockedUsers from './pages/ViewBlockedUsers';
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
         <Route path='/myfavorite/:uid' element={<MyFavorite/>}/>
         <Route path='/profile/:uid' element={<Profile/>}/>     
         <Route path='/updateProfile/:uid' element={<UpdateProfile/>}/>
+        <Route path='/viewBlockedUsers/:uid' element={<ViewBlockedUsers />} />
+
 
         {/* UI ADMIN */}
         <Route path='/setting' element={<Setting/>}/>

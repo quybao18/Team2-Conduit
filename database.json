@@ -1,7 +1,7 @@
 {
   "user": [
     {
-      "id": 1,
+      "id": "1",
       "userName": "John Doe",
       "bio": "I am John Doe, I am 30 years old",
       "email": "joe@example.com",
@@ -12,7 +12,7 @@
       "avatar": "avatar_01"
     },
     {
-      "id": 2,
+      "id": "2",
       "userName": "Jane Smith",
       "bio": "I am Jane Smith, I am 25 years old",
       "email": "jane@example.com",
@@ -23,7 +23,7 @@
       "avatar": "avatar_02"
     },
     {
-      "id": 3,
+      "id": "3",
       "userName": "Alice Johnson",
       "bio": "I am Alice Johnson, I am 35 years old",
       "email": "alice@example.com",
@@ -34,7 +34,7 @@
       "avatar": "avatar_03"
     },
     {
-      "id": 4,
+      "id": "4",
       "userName": "Bob Brown",
       "bio": "I am Bob Brown, I am 40 years old",
       "email": "bob@example.com",
@@ -45,7 +45,7 @@
       "avatar": "avatar_04"
     },
     {
-      "id": 5,
+      "id": "5",
       "userName": "Charlie Davis",
       "bio": "I am Charlie Davis, I am 28 years old",
       "email": "charlie@example.com",
@@ -56,7 +56,7 @@
       "avatar": "avatar_05"
     },
     {
-      "id": 6,
+      "id": "6",
       "userName": "Diana Evans",
       "bio": "I am Diana Evans, I am 32 years old",
       "email": "diana@example.com",
@@ -67,7 +67,7 @@
       "avatar": "avatar_06"
     },
     {
-      "id": 7,
+      "id": "7",
       "userName": "Evan Green",
       "bio": "I am Evan Green, I am 27 years old",
       "email": "evan@example.com",
@@ -78,7 +78,7 @@
       "avatar": "avatar_07"
     },
     {
-      "id": 8,
+      "id": "8",
       "userName": "Fiona Hill",
       "bio": "I am Fiona Hill, I am 29 years old",
       "email": "fiona@example.com",
@@ -89,7 +89,7 @@
       "avatar": "avatar_08"
     },
     {
-      "id": 9,
+      "id": "9",
       "userName": "George King",
       "bio": "I am George King, I am 33 years old",
       "email": "george@example.com",
@@ -100,7 +100,7 @@
       "avatar": "avatar_09"
     },
     {
-      "id": 10,
+      "id": "10",
       "userName": "Hannah Lee",
       "bio": "I am Hannah Lee, I am 26 years old",
       "email": "hannah@example.com",
@@ -119,22 +119,22 @@
       "phone": "035-216-199",
       "roleId": 1,
       "avatar": "avatar_11",
-      "id": 11
+      "id": "11"
     }
   ],
   "role": [
     {
-      "id": 0,
+      "id": "0",
       "roleName": "Admin"
     },
     {
-      "id": 1,
+      "id": "1",
       "roleName": "User"
     }
   ],
   "post": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Introduction to IT: A Beginner's Guide",
       "description": "A comprehensive guide to the basics of Information Technology for newcomers.",
       "favoriteCount": 0,
@@ -143,7 +143,7 @@
       "categoryId": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Common Coding Questions and How to Solve Them",
       "description": "This post highlights some of the most common coding interview questions and effective ways to approach them.",
       "favoriteCount": 5,
@@ -152,7 +152,7 @@
       "categoryId": 2
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "How to Make a Perfect Omelette",
       "description": "Step-by-step guide on how to create a delicious and fluffy omelette.",
       "favoriteCount": 8,
@@ -161,7 +161,7 @@
       "categoryId": 3
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Top 10 Travel Destinations for 2023",
       "description": "Explore the best places to visit this year for your next vacation.",
       "favoriteCount": 3,
@@ -170,7 +170,7 @@
       "categoryId": 4
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Understanding Car Maintenance: What Every Driver Needs to Know",
       "description": "An informative post on how to keep your car running smoothly with basic maintenance tips.",
       "favoriteCount": 10,
@@ -179,7 +179,7 @@
       "categoryId": 5
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Cooking 101: The Essentials Every Beginner Should Know",
       "description": "A beginner's guide to understanding the fundamentals of cooking.",
       "favoriteCount": 0,
@@ -188,7 +188,7 @@
       "categoryId": 3
     },
     {
-      "id": 7,
+      "id": "7",
       "title": "The Ultimate Guide to Solo Travel",
       "description": "Learn everything you need to know about solo travel, from safety tips to planning your trip.",
       "favoriteCount": 2,
@@ -197,7 +197,7 @@
       "categoryId": 4
     },
     {
-      "id": 8,
+      "id": "8",
       "title": "The Best Cars for First-Time Buyers",
       "description": "A curated list of the best vehicles for people buying a car for the first time.",
       "favoriteCount": 6,
@@ -206,7 +206,7 @@
       "categoryId": 5
     },
     {
-      "id": 9,
+      "id": "9",
       "title": "Exploring Hidden Travel Gems Around the World",
       "description": "Discover the most beautiful and least known travel destinations across the globe.",
       "favoriteCount": 4,
@@ -215,7 +215,7 @@
       "categoryId": 4
     },
     {
-      "id": 10,
+      "id": "10",
       "title": "How to Choose the Right Car for Your Needs",
       "description": "A post discussing different factors to consider when choosing a car based on your lifestyle.",
       "favoriteCount": 7,
@@ -224,7 +224,7 @@
       "categoryId": 5
     },
     {
-      "id": 11,
+      "id": "11",
       "title": "The Future of IT: Trends to Watch in 2023",
       "description": "Stay ahead of the curve by understanding the latest trends in the Information Technology industry.",
       "favoriteCount": 12,
@@ -239,7 +239,7 @@
       "createdTime": "2024-08-11 02:09:40",
       "userId": 10,
       "categoryId": 2,
-      "id": 12
+      "id": "12"
     },
     {
       "title": "Which country should everyone visit once in their life ?",
@@ -248,62 +248,80 @@
       "createdTime": "2024-09-11 01:48:43",
       "userId": 11,
       "categoryId": 4,
-      "id": 13
+      "id": "13"
+    },
+    {
+      "id": 14,
+      "title": "Yest",
+      "description": "Deadline den dit",
+      "favoriteCount": 0,
+      "createdTime": "2024-02-12 19:09:53",
+      "userId": "5",
+      "categoryId": 2
+    },
+    {
+      "id": 15,
+      "title": "Yest",
+      "description": "Deadline den dit",
+      "favoriteCount": 0,
+      "createdTime": "2024-02-12 19:09:59",
+      "userId": "5",
+      "categoryId": 2
     }
   ],
   "category": [
     {
-      "id": 1,
+      "id": "1",
       "categoryName": "IT"
     },
     {
-      "id": 2,
+      "id": "2",
       "categoryName": "Question"
     },
     {
-      "id": 3,
+      "id": "3",
       "categoryName": "Cooking"
     },
     {
-      "id": 4,
+      "id": "4",
       "categoryName": "Travelling"
     },
     {
-      "id": 5,
+      "id": "5",
       "categoryName": "Car"
     }
   ],
   "comment": [
     {
-      "id": 1,
+      "id": "1",
       "content": "Great post!",
       "createdTime": "2023-01-01 10:00:00",
       "userId": 1,
       "postId": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "content": "Thanks for the tip!",
       "createdTime": "2023-01-02 11:00:00",
       "userId": 2,
       "postId": 1
     },
     {
-      "id": 3,
+      "id": "3",
       "content": "I agree with this post.",
       "createdTime": "2023-01-02 12:00:00",
       "userId": 3,
       "postId": 1
     },
     {
-      "id": 4,
+      "id": "4",
       "content": "This post is very interesting.",
       "createdTime": "2023-01-04 23:00:00",
       "userId": 4,
       "postId": 2
     },
     {
-      "id": 5,
+      "id": "5",
       "content": "I totally agree with this post.",
       "createdTime": "2023-01-05 00:00:00",
       "userId": 5,
@@ -314,18 +332,18 @@
       "createdTime": "2024-24-11 02:59:33",
       "userId": 10,
       "postId": 11,
-      "id": 6
+      "id": "6"
     },
     {
       "content": "Oke",
       "createdTime": "2024-24-11 03:00:18",
       "userId": 10,
       "postId": 9,
-      "id": 7
+      "id": "7"
     },
     {
       "content": "I suggest you should be going to Switzerland",
-      "id": 8,
+      "id": "8",
       "userId": 3,
       "createdTime": "2024-25-11 04:38:56",
       "postId": 13
@@ -333,41 +351,70 @@
   ],
   "favorite": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1,
       "postId": 5
     },
     {
-      "id": 2,
+      "id": "2",
       "userId": 2,
       "postId": 4
     },
     {
-      "id": 3,
+      "id": "3",
       "userId": 3,
       "postId": 1
     }
   ],
   "follower": [
     {
-      "id": 2,
+      "id": "2",
       "followerId": 1,
       "followingId": 3
     },
     {
-      "id": 3,
+      "id": "3",
       "followerId": 1,
       "followingId": 4
     },
     {
       "followerId": 1,
       "followingId": 9,
-      "id": 5
+      "id": "5"
     },
     {
       "followerId": 1,
       "followingId": 11,
-      "id": 6
+      "id": "6"
+    },
+    {
+      "id": "fda5",
+      "followerId": "5"
+    },
+    {
+      "id": "97fa",
+      "followerId": "5",
+      "followingId": 11
     }
+  ],
+  "block":[
+    
+      {
+        "id": "1",
+        "user_id": 2,
+        "blocked_user_id": 3
+      },
+      {
+        "id": "2",
+        "user_id": 2,
+        "blocked_user_id": 4
+      },
+      {
+        "id": "3" ,
+        "user_id": 2,
+        "blocked_user_id": 5
+      }
+    
+    
   ]
 }

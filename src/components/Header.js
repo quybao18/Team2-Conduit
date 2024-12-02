@@ -43,11 +43,11 @@ function Header() {
                   <Nav.Link onClick={() => navigate(`/mypost/${user.id}`)}>My Posts</Nav.Link>
                   <Nav.Link onClick={() => navigate(`/myfavorite/${user.id}`)}>My Favorite</Nav.Link>
                   <Nav.Link onClick={handleShowAddPost}>New Post</Nav.Link>
+                  <Nav.Link onClick={() => navigate(`/viewBlockedUsers/${user.id}`)}>View Blocked User</Nav.Link>
+                  
                 </>
               ) : (
-                <>
-                  <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
-                </>
+                <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
               )}
             </Nav>
 
@@ -76,15 +76,12 @@ function Header() {
                         <FaUserAlt className="me-2" />
                         Profile
                       </Dropdown.Item>
-                      {
-                        user.roleId === 0 && (
-                          <Dropdown.Item onClick={() => navigate('/setting')}>
-                            <FaCog className="me-2" />
-                            Setting
-                          </Dropdown.Item>
-
-                        )
-                      }
+                      {user.roleId === 0 && (
+                        <Dropdown.Item onClick={() => navigate('/setting')}>
+                          <FaCog className="me-2" />
+                          Setting
+                        </Dropdown.Item>
+                      )}
                       <Dropdown.Item onClick={handleLogout}>
                         <FaSignOutAlt className="me-2" />
                         Logout

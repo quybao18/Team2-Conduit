@@ -16,10 +16,24 @@ const ViewBlockedUsers = () => {
     setLoading(true);
     setError(null);
     try {
+      // Fetch blocked users
       const response = await axios.get("http://localhost:9999/block", {
         params: { user_id: uid }
       });
-      setBlockedUsers(response.data);
+
+      const blockedUsersData = response.data;
+      const updatedBlockedUsers = [];
+
+      // Fetch user details (name) for each blocked user
+      for (const blockedUser of blockedUsersData) {
+        const userResponse = await axios.get(`http://localhost:9999/user/${blockedUser.blocked_user_id}`);
+        updatedBlockedUsers.push({
+          ...blockedUser,
+          blockedUserName: userResponse.data.userName, // Corrected to userName
+        });
+      }
+
+      setBlockedUsers(updatedBlockedUsers); // Update the state with blocked users and their names
     } catch (err) {
       setError("Error fetching blocked users. Please try again later.");
     } finally {
@@ -49,8 +63,8 @@ const ViewBlockedUsers = () => {
   return (
     <div>
       <Header />
-      <Container className="my-5"> {/* Increased vertical margin */}
-        <Row className="my-4"> {/* Adjusted margin for the Row */}
+      <Container style={{ marginTop: "150px", marginBottom: "80px" }}>
+        <Row className="my-4">
           <Col>
             <h1 className="text-center">Blocked Users</h1>
 
@@ -60,27 +74,24 @@ const ViewBlockedUsers = () => {
               </div>
             )}
 
-            {/* Display error message if there was an issue fetching data */}
             {error && (
               <Alert variant="danger">
                 {error}
               </Alert>
             )}
 
-            {/* Display blocked users or a message if none are found */}
             {!loading && !error && blockedUsers.length === 0 && (
               <Alert variant="info" className="text-center">
                 No blocked users found.
               </Alert>
             )}
 
-            {/* Display blocked users in a table */}
             {!loading && !error && blockedUsers.length > 0 && (
               <Table striped bordered hover responsive className="text-center">
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Blocked User ID</th>
+                    <th>Blocked User Name</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -88,7 +99,7 @@ const ViewBlockedUsers = () => {
                   {blockedUsers.map((user, index) => (
                     <tr key={user.id}>
                       <td>{index + 1}</td>
-                      <td>{user.blocked_user_id}</td>
+                      <td>{user.blockedUserName}</td> {/* Corrected to blockedUserName */}
                       <td>
                         <Button
                           variant="danger"
@@ -104,7 +115,6 @@ const ViewBlockedUsers = () => {
               </Table>
             )}
 
-            {/* Button to refresh blocked users */}
             <Button variant="primary" onClick={fetchBlockedUsers} className="mt-3">
               Refresh List
             </Button>

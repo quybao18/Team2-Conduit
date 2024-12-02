@@ -17,13 +17,13 @@ import ManaCategory from './admin/ManaCategory';
 import UpdateRole from './admin/UpdateRole';
 import FollowerPost from './pages/FollowerPost';
 import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
 import ViewPostUsers from './pages/ViewPostUsers';
 import Report from './admin/Report';
 import ManaPost from './admin/ManaPost';
 import ManaComment from './admin/ManaComment';
 import SuccessReport from './pages/SuccessReport';
-
+import ChangePassword from './pages/ChangePassword';
+import ResetPassword from './pages/ResetPassword';
 function App() {
   return (
     <div className="App">
@@ -40,13 +40,14 @@ function App() {
 
         {/* UI USER */}
         <Route path='/forgotPassword' element={<ForgotPassword/>}/>
-        <Route path='/resetPassword' element={<ResetPassword/>}/>
         <Route path='/mypost/:uid' element={<MyPost/>}/>
         <Route path='/myfavorite/:uid' element={<MyFavorite/>}/>
         <Route path='/profile/:uid' element={<Profile/>}/>     
         <Route path='/updateProfile/:uid' element={<UpdateProfile/>}/>
         <Route path='/follower/:uid' element={<FollowerPost/>}/>
         <Route path='/successReport' element={<SuccessReport/>}/>
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/reset-password/:id" element={<ResetPassword />} />
 
         {/* UI ADMIN */}
         <Route path='/setting' element={<Setting/>}/>

@@ -182,6 +182,9 @@ function DetailPost() {
     const handleAddReport = async (e) => {
         e.preventDefault();
         try {
+            if (authentication === null){
+                alert('Please login to report!')
+            }
             const currentTime = formatDate(new Date());
             const newReport = {
                 ...addReport,

@@ -17,7 +17,7 @@ import ManaCategory from './admin/ManaCategory';
 import UpdateRole from './admin/UpdateRole';
 import FollowerPost from './pages/FollowerPost';
 import ForgotPassword from './pages/ForgotPassword';
-import ViewPostUsers from './pages/ViewPostUsers';
+import ViewInfoUsers from './pages/ViewInfoUsers';
 import Report from './admin/Report';
 import ManaPost from './admin/ManaPost';
 import ManaComment from './admin/ManaComment';
@@ -35,7 +35,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/' element={<Home/>}/>
         <Route path='/post/:pid' element={<DetailPost/>}/> 
-        <Route path='/viewPosts/:uid' element={<ViewPostUsers/>}/>
+        <Route path='/viewInformation/:uid' element={<ViewInfoUsers/>}/>
         <Route path='*' element={<ErrorPage/>}/>
 
         {/* UI USER */}

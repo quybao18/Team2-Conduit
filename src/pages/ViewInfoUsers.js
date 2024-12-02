@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { Badge, Button, Card, Col, Container, Row } from 'react-bootstrap';
 
-function ViewPostUsers() {
+function ViewInfoUsers() {
 
     const { uid } = useParams();
 
@@ -230,4 +230,4 @@ function ViewPostUsers() {
     )
 }
 
-export default ViewPostUsers
+export default ViewInfoUsers

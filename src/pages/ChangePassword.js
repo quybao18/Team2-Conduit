@@ -45,81 +45,90 @@ function ChangePassword() {
       setSuccess("Password updated successfully.");
       setTimeout(() => navigate(`/profile/${user.id}`), 2000);
     } catch (err) {
-      setError("Failed to update password.  Please try again.");
+      setError("Failed to update password. Please try again.");
     }
-  };
-
-  const styles = {
-    container: {
-      maxWidth: "600px",
-      margin: "0 auto",
-      backgroundColor: "#f9f9f9",
-      borderRadius: "10px",
-      padding: "20px 30px",
-      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-    },
-    title: {
-      textAlign: "left",
-      marginBottom: "20px",
-      fontWeight: "bold",
-      color: "#333",
-    },
-    formGroup: {
-      marginBottom: "15px",
-    },
-    button: {
-      display: "block",
-      width: "100%",
-      backgroundColor: "#007bff",
-      borderColor: "#007bff",
-      padding: "10px",
-      fontWeight: "bold",
-      fontSize: "16px",
-    },
   };
 
   return (
     <>
       <Header />
-      <Container className="py-5 mt-5" style={styles.container}>
-        <h2 style={styles.title}>Change Password</h2>
-        {error && <Alert variant="danger">{error}</Alert>}
-        {success && <Alert variant="success">{success}</Alert>}
-        <Form onSubmit={handlePasswordChange}>
-          <Form.Group controlId="currentPassword" style={styles.formGroup}>
-            <Form.Label>Current Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter current password"
-              value={currentPassword}
-              onChange={(e) => setCurrentPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="newPassword" style={styles.formGroup}>
-            <Form.Label>New Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter new password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="confirmPassword" style={styles.formGroup}>
-            <Form.Label>Confirm New Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm new password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit" style={styles.button}>
+      <Container className="py-5 mt-5 d-flex justify-content-center">
+        <div
+          style={{
+            maxWidth: "500px",
+            width: "100%",
+            background: "white",
+            borderRadius: "10px",
+            padding: "30px",
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <h3
+            className="text-center mb-4"
+            style={{
+              fontWeight: "bold",
+              color: "#4a4a4a",
+            }}
+          >
             Change Password
-          </Button>
-        </Form>
+          </h3>
+          {error && <Alert variant="danger">{error}</Alert>}
+          {success && <Alert variant="success">{success}</Alert>}
+          <Form onSubmit={handlePasswordChange}>
+            <Form.Group className="mb-3" controlId="currentPassword">
+              <Form.Label style={{ fontWeight: "500", fontSize: "14px", textAlign: "left", display: "block" }}>
+                Current Password
+              </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter current password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                required
+                className="rounded-3"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="newPassword">
+              <Form.Label style={{ fontWeight: "500", fontSize: "14px", textAlign: "left", display: "block" }}>
+                New Password
+              </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter new password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+                className="rounded-3"
+              />
+            </Form.Group>
+            <Form.Group className="mb-4" controlId="confirmPassword">
+              <Form.Label style={{ fontWeight: "500", fontSize: "14px", textAlign: "left", display: "block" }}>
+                Confirm New Password
+              </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirm new password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                className="rounded-3"
+              />
+            </Form.Group>
+            <Button
+              type="submit"
+              variant="primary"
+              className="w-100 rounded-3"
+              style={{
+                fontWeight: "bold",
+                fontSize: "16px",
+                backgroundColor: "#007bff",
+                borderColor: "#007bff",
+              }}
+            >
+              Change Password
+            </Button>
+          </Form>
+        </div>
       </Container>
       <Footer />
     </>

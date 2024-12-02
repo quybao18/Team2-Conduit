@@ -22,7 +22,7 @@ function Header() {
   const handleLogout = () => {
     localStorage.removeItem('user');
     setUser(null);
-    navigate('/login');
+    navigate('/');
   };
 
   return (

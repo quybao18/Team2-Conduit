@@ -3,11 +3,11 @@ import { Badge, Button, Card, Container, InputGroup, ListGroup, Form, Pagination
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import NewPost from './NewPost';
 
 function Home() {
-
+    const { uid } = useParams();
     const [users, setUsers] = useState([]);
     const [posts, setPosts] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -15,6 +15,7 @@ function Home() {
     const [search, setSearch] = useState('');
     const [selectedCate, setSelectedCate] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
+    const [blocked, setBlocked] = useState([]);
     const postsPerPage = 5;
 
 
@@ -27,6 +28,10 @@ function Home() {
                 const postsResponse = await axios.get('http://localhost:9999/post');
                 const categoriesResponse = await axios.get('http://localhost:9999/category');
                 const commentsResponse = await axios.get('http://localhost:9999/comment');
+                const response = await axios.get(`http://localhost:9999/blocked?userId=${uid}`); // ID user hiện tại
+                const blocked = response.data.map(block => block.blockedId);
+
+                setBlocked(blocked);
                 setUsers(usersResponse.data);
                 setPosts(postsResponse.data);
                 setCategories(categoriesResponse.data);
@@ -42,7 +47,8 @@ function Home() {
     const filterPosts = posts.filter((post) => {
         const matchesSearch = post.title.toLowerCase().includes(search.toLowerCase());
         const matchesSelected = selectedCate ? post.categoryId === selectedCate : true;
-        return matchesSearch && matchesSelected;
+        const notBlocked = !blocked.includes(post.userId);
+        return matchesSearch && matchesSelected && notBlocked;
     }).sort((a, b) => b.id - a.id)
 
     const handleSearch = (e) => {

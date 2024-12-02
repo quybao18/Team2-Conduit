@@ -15,6 +15,8 @@ import Setting from './admin/Dashboad';
 import ManaAccount from './admin/ManaAccount';
 import ManaCategory from './admin/ManaCategory';
 import UpdateRole from './admin/UpdateRole';
+import FollowerPost from './pages/FollowerPost';
+
 
 function App() {
   return (
@@ -30,16 +32,18 @@ function App() {
         <Route path='*' element={<ErrorPage/>}/>
 
         {/* UI USER */}
+        <Route path='/:uid' element={<Home/>}/>
         <Route path='/mypost/:uid' element={<MyPost/>}/>
         <Route path='/myfavorite/:uid' element={<MyFavorite/>}/>
         <Route path='/profile/:uid' element={<Profile/>}/>     
         <Route path='/updateProfile/:uid' element={<UpdateProfile/>}/>
+        <Route path='/follower/:uid' element={<FollowerPost/>}/>
 
         {/* UI ADMIN */}
         <Route path='/setting' element={<Setting/>}/>
         <Route path='/manaAccount' element={<ManaAccount/>}/>
         <Route path='/manaCategory' element={<ManaCategory/>}/>
-        
+
       </Routes>
       </BrowserRouter>
     </div>

@@ -29,16 +29,18 @@ function Header() {
     <>
       <Navbar bg="dark" variant="dark" expand="lg" className="position-fixed w-100" style={{ zIndex: 999, top: 0 }}>
         <Container>
-          <Navbar.Brand style={{ cursor: 'pointer' }} href='/'>
+          {user ? (<Navbar.Brand style={{ cursor: 'pointer' }} href={`/${user.id}`}>
             WisdomWell
-          </Navbar.Brand>
-
+          </Navbar.Brand>) : 
+          (<Navbar.Brand style={{ cursor: 'pointer' }} href='/'>
+            WisdomWell
+          </Navbar.Brand>)}          
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               {user ? (
                 <>
-                  <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
+                  <Nav.Link onClick={() => navigate(`/${user.id}`)}>Home</Nav.Link>
                   <Nav.Link onClick={() => navigate(`/follower/${user.id}`)}>Your Feed</Nav.Link>
                   <Nav.Link onClick={() => navigate(`/mypost/${user.id}`)}>My Posts</Nav.Link>
                   <Nav.Link onClick={() => navigate(`/myfavorite/${user.id}`)}>My Favorite</Nav.Link>

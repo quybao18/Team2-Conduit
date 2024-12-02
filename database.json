@@ -3,7 +3,7 @@
     {
       "id": 1,
       "userName": "John Doe",
-      "bio": "I am John Doe, I am 30 years old",
+      "bio": "I am John Doe, I am 30 years old, unmarried",
       "email": "joe@example.com",
       "password": "joe1234",
       "address": "123 Main Street, Anytown, USA",
@@ -120,6 +120,17 @@
       "roleId": 1,
       "avatar": "avatar_11",
       "id": 11
+    },
+    {
+      "userName": "namhai",
+      "bio": "",
+      "email": "nam@gmail.com",
+      "password": "123",
+      "address": "",
+      "phone": "",
+      "roleId": 1,
+      "avatar": "",
+      "id": 12
     }
   ],
   "role": [
@@ -368,6 +379,23 @@
       "followerId": 1,
       "followingId": 11,
       "id": 6
+    },
+    {
+      "followerId": 12,
+      "followingId": 11,
+      "id": 7
+    }
+  ],
+  "blocked": [
+    {
+      "id": 1,
+      "userId": 1,
+      "blockedId": 2
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "blockedId": 3
     }
   ]
 }

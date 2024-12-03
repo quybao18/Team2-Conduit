@@ -56,7 +56,7 @@ function HeaderAdmin() {
               </div>
 
               <div
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/1")}
                 className="d-inline-flex align-items-center me-4"
                 style={{
                   cursor: "pointer",

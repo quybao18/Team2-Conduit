@@ -15,6 +15,9 @@ function ViewPostUsers() {
     const [favorite, setFavorite] = useState([]);
 
     const [authentication, setAuthentication] = useState(null);
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [followerId, setFollowerId] = useState(null);
+    const [blockedUsers, setBlockedUsers] = useState([]);
 
     const navigate = useNavigate();
 
@@ -30,10 +33,22 @@ function ViewPostUsers() {
                 const postsResponse = await axios.get('http://localhost:9999/post');
                 const categoriesResponse = await axios.get('http://localhost:9999/category');
                 const favoriteResponse = await axios.get('http://localhost:9999/favorite');
+                const followingResponse = await axios.get('http://localhost:9999/follower');
+                const blockedResponse = await axios.get(`http://localhost:9999/blockedUsers?userid=${uid}`); // 1 là ID user hiện tại
+                const blocked = blockedResponse.data.map(block => block.blockeduserid);
+                setBlockedUsers(blocked);
+
                 setUser(userResponse.data);
                 setPosts(postsResponse.data);
                 setCategories(categoriesResponse.data);
                 setFavorite(favoriteResponse.data);
+                if (authenData) {
+                    const currentUserId = JSON.parse(authenData).id;
+                    const isUserFollowing = followingResponse.data.some((follow) => follow.followerId === currentUserId && follow.followingId === userResponse.data.id);
+                    const followerId = followingResponse.data.filter((follow) => follow.followerId === currentUserId && follow.followingId === userResponse.data.id);
+                    setFollowerId(followerId[0].id);
+                    setIsFollowing(isUserFollowing);
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -49,6 +64,48 @@ function ViewPostUsers() {
  * @returns {number} The number of favorites for the specified post.
  */
 /******  5c0f3374-5b99-4f9b-9955-d776714d7707  *******/
+const toggleFollow = async () => {
+    try {
+        if (authentication === null) {
+            alert('Please login to follow');
+            navigate('/login');
+            return;
+        }
+        if (isFollowing) {
+            //unfollow 
+            await axios.delete(`http://localhost:9999/follower/${followerId}`);
+
+        } else {
+            //follow
+            await axios.post('http://localhost:9999/follower', {
+
+                followerId: authentication.id,
+                followingId: user.id
+            });
+        }
+        setIsFollowing(!isFollowing);
+        navigate(0);
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+const toggleBlock = async () => {
+    try {
+        if (authentication === null) {
+            alert('Please login to block');
+            navigate('/login');
+            return;
+        }
+        await axios.post('http://localhost:9999/blockedUsers', {
+            userid: authentication.id,
+            blockeduserid: user.id
+        });
+        navigate(0);
+    } catch (error) {
+        console.log(error);
+    }
+}
     const getFavoriteCount = (postId) => {
         return favorite.filter(fav => fav.postId === postId).length;
     }
@@ -110,6 +167,11 @@ function ViewPostUsers() {
                             >
                                 Total Posts: <span style={{ color: '#000' }}>{countPosts}</span>
                             </h5>
+                            {authentication?.id !== user.userId && (
+                                    <Button style={{ marginLeft: 'auto' }} variant={isFollowing ? "danger" : "primary"} onClick={toggleFollow}>
+                                        {isFollowing ? "Unfollow" : "Follow"}
+                                    </Button>)}
+                            <Button variant="dark" style={{ marginLeft: '10px' }} onClick={toggleBlock}>Block</Button>  
                         </Col>
                     </Row>
                 </Container>

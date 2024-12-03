@@ -28,7 +28,7 @@ function Login() {
         const user = users.find(user => user.email === email && user.password === password);
         if (user) {
             localStorage.setItem('user', JSON.stringify(user));
-            navigate('/');
+            navigate(`/${user.id}`);
         } else {
             alert('Invalid email or password');
         }

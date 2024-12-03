@@ -22,7 +22,7 @@ import Report from './admin/Report';
 import ManaPost from './admin/ManaPost';
 import ManaComment from './admin/ManaComment';
 import SuccessReport from './pages/SuccessReport';
-import ChangePassword from './pages/ChangePassword';
+// import ChangePassword from './pages/ChangePassword';
 import ResetPassword from './pages/ResetPassword';
 function App() {
   return (
@@ -34,6 +34,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/' element={<Home/>}/>
+        <Route path='/:uid' element={<Home/>}/>
         <Route path='/post/:pid' element={<DetailPost/>}/> 
         <Route path='/viewPosts/:uid' element={<ViewPostUsers/>}/>
         <Route path='*' element={<ErrorPage/>}/>
@@ -46,7 +47,7 @@ function App() {
         <Route path='/updateProfile/:uid' element={<UpdateProfile/>}/>
         <Route path='/follower/:uid' element={<FollowerPost/>}/>
         <Route path='/successReport' element={<SuccessReport/>}/>
-        <Route path="/change-password" element={<ChangePassword />} />
+        {/* <Route path="/change-password" element={<ChangePassword />} /> */}
         <Route path="/reset-password/:id" element={<ResetPassword />} />
 
         {/* UI ADMIN */}

@@ -620,6 +620,19 @@
       "followerId": 1,
       "followingId": 11,
       "id": 9
+    },
+    {
+      "followerId": 1,
+      "id": 10
+    },
+    {
+      "followerId": 1,
+      "id": 11
+    },
+    {
+      "followerId": 1,
+      "followingId": 7,
+      "id": 12
     }
   ],
   "report": [
@@ -662,6 +675,18 @@
       "pomentId": 9,
       "userId": 8,
       "id": 4
+    }
+  ],
+  "blockedUsers": [
+    {
+      "id": 1,
+      "userid": 1,
+      "blockeduserid": 2
+    },
+    {
+      "id": 2,
+      "userid": 1,
+      "blockeduserid": 3
     }
   ]
 }

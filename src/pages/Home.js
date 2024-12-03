@@ -168,7 +168,7 @@ function Home() {
                                                             backgroundSize: 'cover',
                                                             backgroundPosition: 'center',
                                                         }}
-                                                        onClick={() => navigate(`/viewPosts/${user.id}`)}
+                                                        onClick={() => navigate(`/viewInformation/${user.id}`)}
                                                     ></div>
                                                 }
                                             })

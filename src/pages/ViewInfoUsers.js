@@ -101,7 +101,7 @@ const toggleBlock = async () => {
             userid: authentication.id,
             blockeduserid: user.id
         });
-        navigate(0);
+        navigate(`/${authentication.id}`);
     } catch (error) {
         console.log(error);
     }

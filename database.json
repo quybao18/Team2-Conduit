@@ -672,19 +672,14 @@
   ],
   "blockedUsers": [
     {
-      "id": 1,
-      "userid": 1,
-      "blockeduserid": 2
-    },
-    {
       "id": 2,
       "userid": 1,
       "blockeduserid": 3
     },
     {
       "userid": 1,
-      "blockeduserid": 7,
-      "id": 3
+      "blockeduserid": 10,
+      "id": 6
     }
   ]
 }

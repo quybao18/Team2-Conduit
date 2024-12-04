@@ -19,7 +19,7 @@ function Profile() {
         const fetchData = async() => {
             try {
                 const userResponse = await axios.get(`http://localhost:9999/user/${uid}`);
-                const blockResponse = await axios.get("http://localhost:9999/blockedUsers")
+                const blockResponse = await axios.get("http://localhost:9999/blockedUsers?userid="+uid);
                 const blockedUsersData = blockResponse.data;
                 const updatedBlockedUsers = [];
                 for (const blockedUsers of blockedUsersData) {

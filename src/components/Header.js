@@ -31,10 +31,10 @@ function Header() {
         <Container>
           {user ? (<Navbar.Brand style={{ cursor: 'pointer' }} href={`/${user.id}`}>
             WisdomWell
-          </Navbar.Brand>) : 
-          (<Navbar.Brand style={{ cursor: 'pointer' }} href='/'>
-            WisdomWell
-          </Navbar.Brand>)}          
+          </Navbar.Brand>) :
+            (<Navbar.Brand style={{ cursor: 'pointer' }} href='/'>
+              WisdomWell
+            </Navbar.Brand>)}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -78,16 +78,16 @@ function Header() {
                         <FaUserAlt className="me-2" />
                         Profile
                       </Dropdown.Item>
+                      <Dropdown.Item onClick={() => navigate('/change-password')}>
+                        <FaUserAlt className="me-2" />
+                        Change Password
+                      </Dropdown.Item>
                       {user.roleId === 0 && (
                         <Dropdown.Item onClick={() => navigate('/setting')}>
                           <FaCog className="me-2" />
                           Setting
                         </Dropdown.Item>
                       )}
-                      <Dropdown.Item onClick={() => navigate('/change-password')}>
-                        <FaUserAlt className="me-2" />
-                        Change Password
-                      </Dropdown.Item>
                       <Dropdown.Item onClick={handleLogout}>
                         <FaSignOutAlt className="me-2" />
                         Logout

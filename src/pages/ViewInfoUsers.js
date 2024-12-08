@@ -56,56 +56,74 @@ function ViewInfoUsers() {
         fetchData();
     }, [uid])
 
-/*************  ✨ Codeium Command ⭐  *************/
-/**
- * Returns the count of favorites for a given post.
- *
- * @param {number} postId - The ID of the post to count favorites for.
- * @returns {number} The number of favorites for the specified post.
- */
-/******  5c0f3374-5b99-4f9b-9955-d776714d7707  *******/
-const toggleFollow = async () => {
-    try {
-        if (authentication === null) {
-            alert('Please login to follow');
-            navigate('/login');
-            return;
+    const toggleFollow = async () => {
+        try {
+            if (authentication === null) {
+                alert('Please login to follow');
+                navigate('/login');
+                return;
+            }
+            if (isFollowing) {
+                //unfollow 
+                await axios.delete(`http://localhost:9999/follower/${followerId}`);
+
+            } else {
+                //follow
+                await axios.post('http://localhost:9999/follower', {
+
+                    followerId: authentication.id,
+                    followingId: user.id
+                });
+            }
+            setIsFollowing(!isFollowing);
+            navigate(0);
+        } catch (error) {
+            console.log(error);
         }
-        if (isFollowing) {
-            //unfollow 
-            await axios.delete(`http://localhost:9999/follower/${followerId}`);
 
-        } else {
-            //follow
-            await axios.post('http://localhost:9999/follower', {
-
-                followerId: authentication.id,
-                followingId: user.id
+    }
+    const toggleBlock = async () => {
+        try {
+            if (authentication === null) {
+                alert('Please login to block');
+                navigate('/login');
+                return;
+            }
+            await axios.post('http://localhost:9999/blockedUsers', {
+                userid: authentication.id,
+                blockeduserid: user.id
             });
+            navigate(`/${authentication.id}`);
+        } catch (error) {
+            console.log(error);
         }
-        setIsFollowing(!isFollowing);
-        navigate(0);
-    } catch (error) {
-        console.log(error);
     }
 
-}
-const toggleBlock = async () => {
-    try {
-        if (authentication === null) {
-            alert('Please login to block');
-            navigate('/login');
-            return;
+    const toggleHeart = async (postId) => {
+        try {
+            if(authentication === null) {
+                alert('Please login to favorite');
+                return;
+            }
+
+            const favoriteItem = favorite.find((fav) => fav.postId === postId && fav.userId === authentication.id);
+
+            if(favoriteItem){
+                await axios.delete(`http://localhost:9999/favorite/${favoriteItem.id}`);
+                setFavorite(favorite.filter((fav) => fav.id !== favoriteItem.id));
+            }else{
+                const response = await axios.post('http://localhost:9999/favorite', {
+                    userId: authentication.id,
+                    postId: postId
+                })
+                setFavorite([...favorite, response.data]);
+            }
+
+        } catch (error) {
+            console.log(error);
         }
-        await axios.post('http://localhost:9999/blockedUsers', {
-            userid: authentication.id,
-            blockeduserid: user.id
-        });
-        navigate(`/${authentication.id}`);
-    } catch (error) {
-        console.log(error);
     }
-}
+
     const getFavoriteCount = (postId) => {
         return favorite.filter(fav => fav.postId === postId).length;
     }
@@ -168,10 +186,14 @@ const toggleBlock = async () => {
                                 Total Posts: <span style={{ color: '#000' }}>{countPosts}</span>
                             </h5>
                             {authentication?.id !== user.userId && (
-                                    <Button style={{ marginLeft: 'auto' }} variant={isFollowing ? "danger" : "primary"} onClick={toggleFollow}>
-                                        {isFollowing ? "Unfollow" : "Follow"}
-                                    </Button>)}
-                            <Button variant="dark" style={{ marginLeft: '10px' }} onClick={toggleBlock}>Block</Button>  
+                                <Button style={{ marginLeft: 'auto' }} variant={isFollowing ? "danger" : "primary"} onClick={toggleFollow}>
+                                    {isFollowing ? "Unfollow" : "Follow"}
+                                </Button>)}
+                            {
+                                authentication?.id !== user.userId && (
+                                    <Button variant="dark" style={{ marginLeft: '10px' }} onClick={toggleBlock}>Block</Button>
+                                )
+                            }
                         </Col>
                     </Row>
                 </Container>
@@ -261,6 +283,7 @@ const toggleBlock = async () => {
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                 }}
+                                                onClick={() => toggleHeart(post.id)}
                                             >
                                                 ❤ {getFavoriteCount(post.id)}
                                             </Button>

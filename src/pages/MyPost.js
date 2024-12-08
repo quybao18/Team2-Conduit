@@ -13,11 +13,17 @@ function MyPost() {
     const [posts, setPosts] = useState([]);
     const [category, setCategory] = useState([]);
     const [favorite, setFavorite] = useState([]);
+    const [authentication, setAuthentication] = useState(null);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
+            const authenData = localStorage.getItem('user');
+            if(authenData){
+                setAuthentication(JSON.parse(authenData));
+            }
+
             try {
                 const userResponse = await axios.get(`http://localhost:9999/user/${uid}`);
                 const postsResponse = await axios.get('http://localhost:9999/post');
@@ -34,13 +40,6 @@ function MyPost() {
         fetchData();
     }, [uid])
 
-    const getFavoriteCount = (postId) => {
-        return favorite.filter(fav => fav.postId === postId).length;
-    }
-
-    const isPostFavorited = (postId) => {
-        return favorite?.some(fav => fav?.postId === postId && fav?.userId === user?.id);
-    }
 
     const handleDelete = async (pid) => {
         const confirm = window.confirm('Are you sure you want to delete this post?');
@@ -54,6 +53,34 @@ function MyPost() {
                 console.log(error);
             }
         }
+    }
+
+    const toggleHeart = async (postId) => {
+        try {
+            const favoriteItem = favorite.find((fav) => fav.postId === postId && fav.userId === authentication.id); 
+
+            if(favoriteItem){
+                await axios.delete(`http://localhost:9999/favorite/${favoriteItem.id}`);
+                setFavorite(favorite.filter((fav) => fav.id !== favoriteItem.id));
+            }else{
+                const response = await axios.post('http://localhost:9999/favorite', {
+                    userId: authentication.id,
+                    postId: postId
+                })
+                setFavorite([...favorite, response.data]);
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getFavoriteCount = (postId) => {
+        return favorite.filter(fav => fav.postId === postId).length;
+    }
+
+    const isPostFavorited = (postId) => {
+        return favorite?.some(fav => fav?.postId === postId && fav?.userId === user?.id);
     }
 
     return (
@@ -134,6 +161,7 @@ function MyPost() {
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                 }}
+                                                onClick={() => toggleHeart(post.id)}
                                             >
                                                 ❤ {getFavoriteCount(post.id)}
                                             </Button>

@@ -35,7 +35,7 @@ function ForgotPassword() {
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
       <Row>
         <Col>
-          <Card style={{ width: "22rem", padding: "20px" }}>
+          <Card style={{ width: "28rem", padding: "25px" }}>
             <Card.Header className="bg-primary text-white text-center h5">
               Password Reset
             </Card.Header>
@@ -47,7 +47,7 @@ function ForgotPassword() {
               {success && <Alert variant="success">{success}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formEmail" className="mb-3">
-                  <Form.Label>Email address</Form.Label>
+                  <Form.Label style={{ fontWeight: "bold", fontSize: "16px", float: 'left' }}>Email address</Form.Label>
                   <Form.Control
                     type="email"
                     placeholder="Enter your email"

@@ -41,7 +41,7 @@ function Header() {
               {user ? (
                 <>
                   <Nav.Link onClick={() => navigate(`/${user.id}`)}>Home</Nav.Link>
-                  <Nav.Link onClick={() => navigate(`/follower/${user.id}`)}>Your Feed</Nav.Link>
+                  <Nav.Link onClick={() => navigate(`/follower/${user.id}`)}>Following</Nav.Link>
                   <Nav.Link onClick={() => navigate(`/mypost/${user.id}`)}>My Posts</Nav.Link>
                   <Nav.Link onClick={() => navigate(`/myfavorite/${user.id}`)}>My Favorite</Nav.Link>
                   <Nav.Link onClick={handleShowAddPost}>New Post</Nav.Link>

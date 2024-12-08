@@ -98,7 +98,7 @@ const ViewBlockedUsers = () => {
                   {blockedUsers.map((user, index) => (
                     <tr key={user.id}>
                       <td>{index + 1}</td>
-                      <td>{user.blockedUserName}</td> {/* Corrected to blockedUserName */}
+                      <td>{user.blockedUserName}</td> 
                       <td>
                         <Button
                           variant="danger"

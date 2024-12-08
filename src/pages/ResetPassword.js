@@ -43,7 +43,7 @@ function ResetPassword() {
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
       <Row>
         <Col>
-          <Card style={{ width: "22rem", padding: "20px" }}>
+          <Card style={{ width: "28rem", padding: "25px" }}>
             <Card.Header className="bg-primary text-white text-center h5">
               Reset Your Password
             </Card.Header>
@@ -55,7 +55,7 @@ function ResetPassword() {
               {success && <Alert variant="success">{success}</Alert>}
               <Form onSubmit={handlePasswordReset}>
                 <Form.Group controlId="newPassword" className="mb-3">
-                  <Form.Label>New Password</Form.Label>
+                  <Form.Label style={{ fontWeight: "bold", fontSize: "16px", float: 'left' }}>New Password</Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="Enter new password"
@@ -65,7 +65,7 @@ function ResetPassword() {
                   />
                 </Form.Group>
                 <Form.Group controlId="confirmPassword" className="mb-3">
-                  <Form.Label>Confirm New Password</Form.Label>
+                  <Form.Label style={{ fontWeight: "bold", fontSize: "16px", float: 'left' }}>Confirm New Password</Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="Confirm new password"

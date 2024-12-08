@@ -37,6 +37,7 @@ function UpdateRole({ show, handleClose, userId }) {
       await axios.put(`http://localhost:9999/user/${userId}`, user);
       alert('Role updated successfully');
       handleClose();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }

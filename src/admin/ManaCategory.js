@@ -46,6 +46,7 @@ function ManaCategory() {
         categoryName: ''
       })
       navigate('/manaCategory');
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -106,7 +107,6 @@ function ManaCategory() {
             </Col>
           </Row>
 
-          {/* Display Categories in a Table */}
           <Row>
             <Col>
               <Table striped bordered hover responsive className="text-center">

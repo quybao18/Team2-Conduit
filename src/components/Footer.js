@@ -68,6 +68,7 @@ function Footer() {
                 <Badge
                   key={idx}
                   as="a"
+                  href="#"
                   className="m-2"
                   style={{
                     fontSize: '1.5rem',

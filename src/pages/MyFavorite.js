@@ -78,7 +78,7 @@ function MyFavorite() {
             <Header />
             <div className="row mt-5 ms-5 me-5">
                 <h3 className='mt-5'>My Favorite</h3>
-                <div className="list-group">
+                <div className="list-group mt-5">
                     {
                         posts.map((post, index) => {
                             if (favorite.some(fav => fav.postId === post.id && fav.userId === user.id)) {

@@ -88,7 +88,7 @@ function UpdateProfile() {
 
                                 <Form.Group controlId="password" className="mb-3">
                                     <Form.Label style={{ fontWeight: "bold", textAlign: 'left', display: 'block' }}>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Enter a new password" name='password' value={user.password} onChange={handleChange} />
+                                    <Form.Control type="password" placeholder="Enter a new password" name='password' value={user.password} readOnly />
                                 </Form.Group>
 
                                 <Form.Group controlId="address" className="mb-3">

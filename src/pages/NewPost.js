@@ -75,6 +75,7 @@ function NewPost({ show, handleClose }) {
       ])
       alert('Post added successfully');
       handleClose();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }

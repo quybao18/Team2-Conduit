@@ -139,7 +139,7 @@ function Home() {
             </div>
 
             <div className="row mt-5 ms-5 me-5">
-                <div className="col-lg-9">  
+                <div className="col-lg-9">
                     <h2 className="mb-4 text-success">🌐 Global Feed</h2>
                     <div className="list-group">
                         {currentPosts.map((post, index) => (
@@ -213,19 +213,19 @@ function Home() {
                                     style={{ gap: '10px' }}
                                 >
                                     <Button
-                                        variant={isPostFavorited(post?.id) ? "success" : "outline-success"} 
+                                        variant={isPostFavorited(post?.id) ? "success" : "outline-success"}
                                         size="sm"
                                         style={{
                                             fontSize: '0.8rem',
                                             display: 'flex',
                                             alignItems: 'center',
                                         }}
-                                        onClick={() => toggleHeart(post.id)} 
+                                        onClick={() => toggleHeart(post.id)}
                                     >
                                         ❤ {getFavoriteCount(post.id)}
                                     </Button>
 
-                                    
+
 
                                     <br />
                                     <Badge
@@ -282,12 +282,39 @@ function Home() {
                 </div>
             </div>
 
-            <Pagination className='justify-content-center'>
-                {pageNumbers.map(number => (
-                    <Pagination.Item key={number} onClick={() => setCurrentPage(number)} active={number === currentPage}>
+            <Pagination className="justify-content-center mt-4">
+                <Pagination.First
+                    onClick={() => setCurrentPage(1)}
+                    disabled={currentPage === 1}
+                />
+                <Pagination.Prev
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                />
+                {pageNumbers.map((number) => (
+                    <Pagination.Item
+                        key={number}
+                        active={number === currentPage}
+                        onClick={() => setCurrentPage(number)}
+                        style={
+                            number === currentPage
+                                ? { backgroundColor: "#28a745", color: "white", borderRadius: "5px" }
+                                : { borderRadius: "5px" }
+                        }
+                    >
                         {number}
                     </Pagination.Item>
                 ))}
+                <Pagination.Next
+                    onClick={() =>
+                        setCurrentPage((prev) => Math.min(prev + 1, pageNumbers.length))
+                    }
+                    disabled={currentPage === pageNumbers.length}
+                />
+                <Pagination.Last
+                    onClick={() => setCurrentPage(pageNumbers.length)}
+                    disabled={currentPage === pageNumbers.length}
+                />
             </Pagination>
 
             <Footer />

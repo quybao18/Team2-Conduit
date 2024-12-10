@@ -38,7 +38,7 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {user ? (
+              {(user && user.roleId !== null) ? (
                 <>
                   <Nav.Link onClick={() => navigate(`/${user.id}`)}>Home</Nav.Link>
                   <Nav.Link onClick={() => navigate(`/follower/${user.id}`)}>Following</Nav.Link>

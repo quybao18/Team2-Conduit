@@ -3,6 +3,7 @@ import { Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { FaCheckCircle } from 'react-icons/fa'; // Import success icon from react-icons
 
 function SuccessReport() {
+
   return (
     <Container fluid className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh', backgroundColor: '#e9f7ef' }}>
       <Row className="justify-content-center w-100">

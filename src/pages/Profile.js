@@ -83,15 +83,15 @@ function Profile() {
               <ListGroup variant="flush">
                 <ListGroup.Item className="d-flex align-items-center">
                   <FaEnvelope className="me-3 text-primary" />
-                  <strong>Email: </strong> {user.email}
+                  <strong className="pe-1">Email: </strong> {user.email}
                 </ListGroup.Item>
                 <ListGroup.Item className="d-flex align-items-center">
                   <FaMapMarkerAlt className="me-3 text-primary" />
-                  <strong>Address: </strong> {user.address}
+                  <strong className="pe-1">Address: </strong> {user.address}
                 </ListGroup.Item>
                 <ListGroup.Item className="d-flex align-items-center">
                   <FaPhone className="me-3 text-primary" />
-                  <strong>Phone: </strong> {user.phone}
+                  <strong className="pe-1">Phone: </strong> {user.phone}
                 </ListGroup.Item>
               </ListGroup>
             </Card.Body>

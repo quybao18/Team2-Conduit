@@ -194,13 +194,30 @@ function ViewInfoUsers() {
                             >
                                 Total Posts: <span style={{ color: '#000' }}>{countPosts}</span>
                             </h5>
-                            {authentication?.id !== user.userId && (
+                            {/* {authentication?.id !== user.userId && (
                                 <Button style={{ marginLeft: 'auto' }} variant={isFollowing ? "danger" : "primary"} onClick={toggleFollow}>
                                     {isFollowing ? "Unfollow" : "Follow"}
                                 </Button>)}
                             {
                                 authentication?.id !== user.userId && (
                                     <Button variant="dark" style={{ marginLeft: '10px' }} onClick={toggleBlock}>Block</Button>
+                                )
+                            } */}
+                            {
+                                (authentication?.id === user.id) ? (
+                                    <></>
+                                ) : (
+                                    <>
+                                        {authentication?.id !== user.userId && (
+                                            <Button style={{ marginLeft: 'auto' }} variant={isFollowing ? "danger" : "primary"} onClick={toggleFollow}>
+                                                {isFollowing ? "Unfollow" : "Follow"}
+                                            </Button>)}
+                                        {
+                                            authentication?.id !== user.userId && (
+                                                <Button variant="dark" style={{ marginLeft: '10px' }} onClick={toggleBlock}>Block</Button>
+                                            )
+                                        }
+                                    </>
                                 )
                             }
                         </Col>

@@ -110,6 +110,12 @@ function DetailPost() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(!addComment.content.trim()) {
+            alert('Please enter a comment!');
+            return;
+        }
+
         const currentTime = formatDate(new Date());
         const newComment = {
             ...addComment,
@@ -124,7 +130,6 @@ function DetailPost() {
                 ...prevComments,
                 response.data
             ])
-            alert('Comment added successfully');
             setAddComment({
                 content: '',
             })

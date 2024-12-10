@@ -22,44 +22,81 @@ import Report from './admin/Report';
 import ManaPost from './admin/ManaPost';
 import ManaComment from './admin/ManaComment';
 import SuccessReport from './pages/SuccessReport';
- import ChangePassword from './pages/ChangePassword';
+import ChangePassword from './pages/ChangePassword';
 import ResetPassword from './pages/ResetPassword';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 function App() {
+
+  const [authentication, setAuthentication] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const authenData = localStorage.getItem('user');
+        if (authenData) {
+          setAuthentication(authenData);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [])
+
   return (
     <div className="App">
       <BrowserRouter>
-      <Routes>
+        <Routes>
 
-        {/* UI COMMON */}
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/:uid' element={<Home/>}/>
-        <Route path='/post/:pid' element={<DetailPost/>}/> 
-        <Route path='/viewInformation/:uid' element={<ViewInfoUsers/>}/>
-        <Route path='*' element={<ErrorPage/>}/>
+          {/* UI COMMON */}
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/:uid' element={<Home />} />
+          <Route path='/post/:pid' element={<DetailPost />} />
+          <Route path='/viewInformation/:uid' element={<ViewInfoUsers />} />
+          <Route path='*' element={<ErrorPage />} />
 
-        {/* UI USER */}
-        <Route path='/forgotPassword' element={<ForgotPassword/>}/>
-        <Route path='/mypost/:uid' element={<MyPost/>}/>
-        <Route path='/myfavorite/:uid' element={<MyFavorite/>}/>
-        <Route path='/profile/:uid' element={<Profile/>}/>     
-        <Route path='/updateProfile/:uid' element={<UpdateProfile/>}/>
-        <Route path='/follower/:uid' element={<FollowerPost/>}/>
-        <Route path='/successReport' element={<SuccessReport/>}/>
-         <Route path="/change-password" element={<ChangePassword />} /> 
-        <Route path="/reset-password/:id" element={<ResetPassword />} />
+          {/* UI USER */}
+          <Route path='/forgotPassword' element={<ForgotPassword />} />
+          <Route path='/mypost/:uid' element={<MyPost />} />
+          <Route path='/myfavorite/:uid' element={<MyFavorite />} />
+          <Route path='/profile/:uid' element={<Profile />} />
+          <Route path='/updateProfile/:uid' element={<UpdateProfile />} />
+          <Route path='/follower/:uid' element={<FollowerPost />} />
+          <Route path='/successReport' element={<SuccessReport />} />
+          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/reset-password/:id" element={<ResetPassword />} />
 
-        {/* UI ADMIN */}
-        <Route path='/setting' element={<Setting/>}/>
-        <Route path='/report' element={<Report/>}/>
-        <Route path='/manaAccount' element={<ManaAccount/>}/>
-        <Route path='/manaCategory' element={<ManaCategory/>}/>
-        <Route path='/manaPost' element={<ManaPost/>}/>
-        <Route path='/manaComment' element={<ManaComment/>}/>
-        <Route path='/report' element={<Report/>}/>
-        
-      </Routes>
+          {/* {
+            (authentication && authentication !== null) ? (
+              <>
+                <Route path='/forgotPassword' element={<ForgotPassword />} />
+                <Route path='/mypost/:uid' element={<MyPost />} />
+                <Route path='/myfavorite/:uid' element={<MyFavorite />} />
+                <Route path='/profile/:uid' element={<Profile />} />
+                <Route path='/updateProfile/:uid' element={<UpdateProfile />} />
+                <Route path='/follower/:uid' element={<FollowerPost />} />
+                <Route path='/successReport' element={<SuccessReport />} />
+                <Route path="/change-password" element={<ChangePassword />} />
+                <Route path="/reset-password/:id" element={<ResetPassword />} /></>
+            ) : (
+              <>
+              </>
+            )
+          } */}
+
+          {/* UI ADMIN */}
+          <Route path='/setting' element={<Setting />} />
+          <Route path='/report' element={<Report />} />
+          <Route path='/manaAccount' element={<ManaAccount />} />
+          <Route path='/manaCategory' element={<ManaCategory />} />
+          <Route path='/manaPost' element={<ManaPost />} />
+          <Route path='/manaComment' element={<ManaComment />} />
+          <Route path='/report' element={<Report />} />
+
+        </Routes>
       </BrowserRouter>
     </div>
   );

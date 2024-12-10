@@ -59,6 +59,16 @@ function NewPost({ show, handleClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!addPost.title.trim()) {
+      alert('Please enter a title for the post.');
+      return;
+    }
+    if (!addPost.description.trim()) {
+      alert('Please enter a description for the post.');
+      return;
+    }
+    
     const currentTime = formatDate(new Date());
 
     const newPost = {

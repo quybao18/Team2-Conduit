@@ -47,7 +47,6 @@ function MyPost() {
             try {
                 await axios.delete(`http://localhost:9999/post/${pid}`)
                 setPosts(posts.filter(post => post.id !== pid));
-                alert('Post deleted successfully');
                 navigate(`/mypost/${uid}`)
             } catch (error) {
                 console.log(error);

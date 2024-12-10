@@ -1,28 +1,24 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
-
-    const [userName, setUserName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
-    const [termsAccepted, setTermsAccepted] = useState(false);
-
-
-    const navigate = useNavigate();
-
     const [addUser, setAddUser] = useState({
         userName: '',
-        bio: '',
         email: '',
         password: '',
+        bio: '',
         address: '',
         phone: '',
         roleId: 1,
-        avatar: ''
-    })
+        avatar: '',
+    });
+
+    const [repeatPassword, setRepeatPassword] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [formError, setFormError] = useState('');
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,46 +27,60 @@ function Register() {
         } else {
             setAddUser({
                 ...addUser,
-                [name]: value
-            })
+                [name]: value,
+            });
         }
-    }
+    };
 
     const handleRegister = async (e) => {
         e.preventDefault();
 
-
+        // Check required fields
         if (!addUser.userName || !addUser.email || !addUser.password || !repeatPassword) {
-            alert('Please fill in all fields');
+            setFormError('Please fill in all fields');
             return;
         }
 
-        if(addUser.password !== repeatPassword){
-            alert('Passwords do not match');
+        // Clear form-level error
+        setFormError('');
+
+        // Check password match
+        if (addUser.password !== repeatPassword) {
+            setPasswordError('Passwords do not match');
             return;
         }
 
+        // Validate password strength
+        const passwordRegex = /^(?=.*[0-9])[A-Za-z\d]{6,}$/;
+        if (!passwordRegex.test(addUser.password)) {
+            setPasswordError('Password must be at least 6 characters long and include a number');
+            return;
+        }
+
+        // Clear password error if validation passes
+        setPasswordError('');
 
         try {
             const usersResponse = await axios.get('http://localhost:9999/user');
-            const exsitingAccount = usersResponse.data.find(user => user.email === addUser.email);
-            if (exsitingAccount) {
-                alert('Email already exists');
+            const existingAccount = usersResponse.data.find(user => user.email === addUser.email);
+            if (existingAccount) {
+                setFormError('Email already exists');
                 return;
             }
 
+            // Add new user
             const newUser = {
                 ...addUser,
-                id: usersResponse.data.length + 1
-            }
-            await axios.post('http://localhost:9999/user', newUser)
-            alert('Registration successful');
+                id: usersResponse.data.length + 1,
+            };
+            await axios.post('http://localhost:9999/user', newUser);
+
+            // Registration success
             navigate('/login');
         } catch (error) {
             console.log(error);
         }
-    }
-
+    };
 
     return (
         <section className="vh-100" style={{ backgroundColor: '#eee' }}>
@@ -81,33 +91,56 @@ function Register() {
                             <div className="card-body p-md-5">
                                 <div className="row justify-content-center">
                                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                                        <img onClick={() => navigate('/login')} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/BackButton.svg/2048px-BackButton.svg.png" width="50px" alt="Back" style={{ cursor: 'pointer', float: 'left' }} />
+                                        <img
+                                            onClick={() => navigate('/login')}
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/BackButton.svg/2048px-BackButton.svg.png"
+                                            width="50px"
+                                            alt="Back"
+                                            style={{ cursor: 'pointer', float: 'left' }}
+                                        />
                                         <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
                                         <form onSubmit={handleRegister} className="mx-1 mx-md-4">
                                             <div className="d-flex flex-row align-items-center mb-4">
                                                 <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                                                 <div className="form-outline flex-fill mb-0">
-                                                    <label className="form-label"  style={{ fontWeight: 'bold', textAlign: 'left', display: 'block' }}>Your Name</label>
-                                                    <input type="text"  className="form-control" name='userName' value={addUser.userName} onChange={handleChange} />
+                                                    <label className="form-label" style={{ fontWeight: 'bold', textAlign: 'left', display: 'block' }}>Your Name</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        name="userName"
+                                                        value={addUser.userName}
+                                                        onChange={handleChange}
+                                                    />
                                                 </div>
                                             </div>
 
                                             <div className="d-flex flex-row align-items-center mb-4">
                                                 <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                 <div className="form-outline flex-fill mb-0">
-                                                    <label className="form-label"  style={{ fontWeight: 'bold', textAlign: 'left', display: 'block' }}>Your Email</label>
-                                                    <input type="email"  className="form-control" name='email' value={addUser.email} onChange={handleChange} />
-
+                                                    <label className="form-label" style={{ fontWeight: 'bold', textAlign: 'left', display: 'block' }}>Your Email</label>
+                                                    <input
+                                                        type="email"
+                                                        className="form-control"
+                                                        name="email"
+                                                        value={addUser.email}
+                                                        onChange={handleChange}
+                                                    />
                                                 </div>
                                             </div>
 
                                             <div className="d-flex flex-row align-items-center mb-4">
                                                 <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                                                 <div className="form-outline flex-fill mb-0">
-                                                    <label className="form-label"  style={{ fontWeight: 'bold', textAlign: 'left', display: 'block' }}>Password</label>
-                                                    <input type="password"  className="form-control" name='password' value={addUser.password} onChange={handleChange} />
-
+                                                    <label className="form-label" style={{ fontWeight: 'bold', textAlign: 'left', display: 'block' }}>Password</label>
+                                                    <input
+                                                        type="password"
+                                                        className={`form-control ${passwordError ? 'is-invalid' : ''}`}
+                                                        name="password"
+                                                        value={addUser.password}
+                                                        onChange={handleChange}
+                                                    />
+                                                    {passwordError && <div className="invalid-feedback" style={{ color: 'red', fontSize: '0.9rem' }}>{passwordError}</div>}
                                                 </div>
                                             </div>
 
@@ -115,16 +148,19 @@ function Register() {
                                                 <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                                                 <div className="form-outline flex-fill mb-0">
                                                     <label className="form-label" style={{ fontWeight: 'bold', textAlign: 'left', display: 'block' }}>Repeat your password</label>
-                                                    <input type="password"  className="form-control" name='repeatPassword' value={repeatPassword} onChange={handleChange}/>
-
+                                                    <input
+                                                        type="password"
+                                                        className="form-control"
+                                                        name="repeatPassword"
+                                                        value={repeatPassword}
+                                                        onChange={handleChange}
+                                                    />
                                                 </div>
                                             </div>
 
+                                            {formError && <div className="text-danger mb-3" style={{ fontSize: '0.9rem' }}>{formError}</div>}
+
                                             <div className="form-check d-flex justify-content-center mb-5">
-                                                <input className="form-check-input me-2" type="checkbox" />
-                                                <label className="form-check-label" htmlFor="termsAccepted">
-                                                    I agree all statements in <a>Terms of service</a>
-                                                </label>
                                             </div>
 
                                             <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

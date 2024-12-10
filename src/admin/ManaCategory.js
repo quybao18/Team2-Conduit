@@ -29,17 +29,21 @@ function ManaCategory() {
   })
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setAddCate({
       ...addCate,
-      [name] : value
+      [name]: value
     })
   }
 
   const handleAddCate = async (e) => {
     e.preventDefault();
+    if (!addCate.categoryName.trim()) {
+      alert('Please enter a category name!');
+      return;
+    }
     try {
-      const newCate = {...addCate, id: categories.length + 1};
+      const newCate = { ...addCate, id: categories.length + 1 };
       await axios.post('http://localhost:9999/category', newCate);
       alert('Category added successfully');
       setAddCate({
@@ -55,7 +59,7 @@ function ManaCategory() {
 
   const handleDelete = async (cid) => {
     const confirm = window.confirm('Are you sure you want to delete this category?');
-    if(confirm){
+    if (confirm) {
       try {
         await axios.delete(`http://localhost:9999/category/${cid}`);
         setCategories(categories.filter(cate => cate.id !== cid));
@@ -92,7 +96,7 @@ function ManaCategory() {
           {/* Form to Add a New Category */}
           <Row className="my-3">
             <Col md={{ span: 6, offset: 3 }}>
-              <Form onSubmit={handleAddCate}  className="d-flex gap-2">
+              <Form onSubmit={handleAddCate} className="d-flex gap-2">
                 <Form.Control
                   type="text"
                   placeholder="New Category"

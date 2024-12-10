@@ -89,29 +89,38 @@ function ViewInfoUsers() {
                 navigate('/login');
                 return;
             }
+
+            // Unfollow the user if they are currently being followed
+            if (isFollowing) {
+                await axios.delete(`http://localhost:9999/follower/${followerId}`);
+                setIsFollowing(false); // Update state to reflect the change
+            }
+
+            // Block the user
             await axios.post('http://localhost:9999/blockedUsers', {
                 userid: authentication.id,
                 blockeduserid: user.id
             });
-            navigate(`/${authentication.id}`);
+
+            navigate(`/${authentication.id}`); // Redirect to a relevant page
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const toggleHeart = async (postId) => {
         try {
-            if(authentication === null) {
+            if (authentication === null) {
                 alert('Please login to favorite');
                 return;
             }
 
             const favoriteItem = favorite.find((fav) => fav.postId === postId && fav.userId === authentication.id);
 
-            if(favoriteItem){
+            if (favoriteItem) {
                 await axios.delete(`http://localhost:9999/favorite/${favoriteItem.id}`);
                 setFavorite(favorite.filter((fav) => fav.id !== favoriteItem.id));
-            }else{
+            } else {
                 const response = await axios.post('http://localhost:9999/favorite', {
                     userId: authentication.id,
                     postId: postId

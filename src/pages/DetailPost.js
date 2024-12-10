@@ -182,8 +182,13 @@ function DetailPost() {
     const handleAddReport = async (e) => {
         e.preventDefault();
         try {
-            if (authentication === null){
+            if (authentication === null) {
                 alert('Please login to report!')
+            }
+            // Validate input fields
+            if (!addReport.title || !addReport.description) {
+                alert('Please fill in both the title and description!');
+                return;
             }
             const currentTime = formatDate(new Date());
             const newReport = {

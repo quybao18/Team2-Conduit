@@ -17,7 +17,7 @@ function Header() {
     if (userData) {
       setUser(userData);
     }
-  }, []);
+  }, [localStorage.getItem('user')]);
 
   const handleLogout = () => {
     localStorage.removeItem('user');

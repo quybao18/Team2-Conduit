@@ -37,8 +37,8 @@ function UpdateProfile() {
         e.preventDefault();
         try {
             await axios.put(`http://localhost:9999/user/${uid}`, user);
+            localStorage.setItem("user", JSON.stringify(user));
             alert("Profile updated successfully");
-            <Header/>
             navigate(`/profile/${uid}`)
         } catch (error) {
             console.error("Error updating profile:", error);
